@@ -2,7 +2,7 @@
   "profiles": {
     "R2JPGomokuConsole": {
       "commandName": "Project",
-      "commandLineArgs": "new_game 47111 p1 p2"
+      "commandLineArgs": "play 4711-4 p1"
     }
   }
 }
