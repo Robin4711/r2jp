@@ -29,7 +29,7 @@ namespace R2JPGomokuLib {
         }
 
         public void ViewGame(string gameId) {
-            var response = Post(HttpMethod.Get, $"view_game/{gameId}").Result;
+            var response = Call(HttpMethod.Get, $"view_game/{gameId}").Result;
             Console.Write(response);
         }
 
@@ -37,13 +37,13 @@ namespace R2JPGomokuLib {
         public async Task NewGame(string gameId, string player1, string player2) {
             var data = new NewGameRequest { player_1 = player1, player_2 = player2 };
 
-            await Post(HttpMethod.Post, $"new_game/{gameId}", data);
+            await Call(HttpMethod.Post, $"new_game/{gameId}", data);
 
         }
 
         public async Task PlayGame(string gameId, string myPlayer, string marker) {
             while (true) {
-                var response = Post(HttpMethod.Get, $"view_game/{gameId}").Result;
+                var response = Call(HttpMethod.Get, $"view_game/{gameId}").Result;
 
                 if (response.Equals("ERROR!")) {
                     return;
@@ -61,7 +61,8 @@ namespace R2JPGomokuLib {
                     var move = board.NextMove();
                     var data = new MoveRequest() { player = myPlayer, x = move.X, y = move.Y };
                     //string json = JsonConvert.SerializeObject(data);
-                    var res = Post(HttpMethod.Put, $"play_game/{gameId}", data).Result;
+                    var res = Call(HttpMethod.Put, $"play_game/{gameId}", data).Result;
+                    res = Call(HttpMethod.Get, $"view_game/{gameId}/pretty").Result;
                     Console.Write(res);
                 }
 
@@ -69,7 +70,7 @@ namespace R2JPGomokuLib {
             }
         }
 
-        private async Task<string> Post(HttpMethod method, string path, object data = null) {
+        private async Task<string> Call(HttpMethod method, string path, object data = null) {
             HttpRequestMessage request = new HttpRequestMessage(method, $"http://gomoku.fly.dev/{path}");
 
             string json = JsonConvert.SerializeObject(data);
