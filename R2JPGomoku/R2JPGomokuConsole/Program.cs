@@ -1,9 +1,19 @@
-﻿using System;
+﻿using R2JPGomokuLib;
+using System;
+using System.Threading.Tasks;
 
-namespace R2JPGomukoConsole {
+namespace R2JPGomokuConsole {
     class Program {
-        static void Main(string[] args) {
-            Console.WriteLine("Hello World!");
+        static async Task Main(string[] args) {
+            switch (args[0]) {
+                case "new_game":
+                    await new GameController().NewGame(args[1], args[2], args[3]);
+                    break;
+                case "play":
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
