@@ -56,6 +56,20 @@ namespace R2JPGomokuLib {
                     return new Move { X = x, Y = y };
                 }
 
+                x = xOfFoundNextMove(rowsAsStrings[i], "pppp-");
+                if (x != -1)
+                {
+                    y = i;
+                    return new Move { X = x, Y = y };
+                }
+
+                x = xOfFoundNextMove(rowsAsStrings[i], "-pppp");
+                if (x != -1)
+                {
+                    y = i;
+                    return new Move { X = x, Y = y };
+                }
+
                 x = xOfFoundNextMove(rowsAsStrings[i], "-mp");
                 if (x != -1)
                 {

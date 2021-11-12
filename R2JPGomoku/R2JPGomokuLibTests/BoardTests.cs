@@ -1,15 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using R2JPGomokuLib;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using static R2JPGomokuLib.Board;
 
-namespace R2JPGomokuLib.Tests {
+namespace R2JPGomokuLib.Tests
+{
     [TestClass()]
-    public class BoardTests {
+    public class BoardTests
+    {
         [TestMethod()]
-        public void FirstTest_FirstMove() {
+        public void FirstTest_FirstMove()
+        {
             var listBoard = new List<List<string>>() {
                 new List<string>() { null, null, null, null, null, null },
                 new List<string>() { null, null, null, null, null, null },
@@ -40,7 +40,7 @@ namespace R2JPGomokuLib.Tests {
 
             var board = new Board(listBoard, "x");
 
-            var expected = new Move() { X = 4, Y = 2};
+            var expected = new Move() { X = 4, Y = 2 };
 
             PerformTest(board, expected);
         }
@@ -88,6 +88,26 @@ namespace R2JPGomokuLib.Tests {
         }
 
         [TestMethod()]
+        public void CanTheyWin_FourInRow_Left()
+        {
+            var listBoard = new List<List<string>>() {
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { "o", "o", "o", "o", null, null },
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null }
+            };
+
+            var board = new Board(listBoard, "x");
+
+            var expected = new Move() { X = 4, Y = 2 };
+
+            PerformTest(board, expected);
+        }
+
+
+        [TestMethod()]
         public void CanWeWin_FourInRow_Right()
         {
             var listBoard = new List<List<string>>() {
@@ -106,10 +126,31 @@ namespace R2JPGomokuLib.Tests {
             PerformTest(board, expected);
         }
 
-        private void PerformTest(Board board, Move expected) {
+
+        [TestMethod()]
+        public void CanTneyWin_FourInRow_Right()
+        {
+            var listBoard = new List<List<string>>() {
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { null, null, "o", "o", "o", "o" },
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null }
+            };
+
+            var board = new Board(listBoard, "x");
+
+            var expected = new Move() { X = 1, Y = 2 };
+
+            PerformTest(board, expected);
+        }
+
+        private void PerformTest(Board board, Move expected)
+        {
             var actual = board.NextMove();
-            Assert.AreEqual(expected.X, actual.X, $"Expected: X {expected.X} Actual: {actual.X}");
-            Assert.AreEqual(expected.Y, actual.Y, $"Expected: Y {expected.Y} Actual: {actual.Y}");
+            Assert.AreEqual(expected.X, actual.X, "X");
+            Assert.AreEqual(expected.Y, actual.Y, "Y");
         }
     }
 }
