@@ -38,7 +38,7 @@ namespace R2JPGomokuLib {
         }
 
         public Move NextMove() {
-            var rowsAsStrings = Rows().Select(r => String.Join(string.Empty, r)).ToList();
+            var rowsAsStrings = Rows().Select(r => String.Join(string.Empty, r)+"R").ToList();
             var y = 0;
             var x = 0;
             for (int i = 0; i < rowsAsStrings.Count(); i++)
@@ -64,6 +64,34 @@ namespace R2JPGomokuLib {
                 }
 
                 x = xOfFoundNextMove(rowsAsStrings[i], "-pppp");
+                if (x != -1)
+                {
+                    y = i;
+                    return new Move { X = x, Y = y };
+                }
+
+                x = xOfFoundNextMove(rowsAsStrings[i], "ppp-");
+                if (x != -1)
+                {
+                    y = i;
+                    return new Move { X = x, Y = y };
+                }
+
+                x = xOfFoundNextMove(rowsAsStrings[i], "-ppp");
+                if (x != -1)
+                {
+                    y = i;
+                    return new Move { X = x, Y = y };
+                }
+
+                x = xOfFoundNextMove(rowsAsStrings[i], "pp-");
+                if (x != -1)
+                {
+                    y = i;
+                    return new Move { X = x, Y = y };
+                }
+
+                x = xOfFoundNextMove(rowsAsStrings[i], "-pp");
                 if (x != -1)
                 {
                     y = i;

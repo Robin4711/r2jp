@@ -67,6 +67,49 @@ namespace R2JPGomokuLib.Tests
 
             PerformTest(board, expected);
         }
+        [TestMethod()]
+        public void CanWeWin_FourInRowColumn()
+        {
+            var listBoard = new List<List<string>>() {
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, "x", "o", null, null },
+                new List<string>() {null, null, null, null, null, "x", null, null, null },
+                new List<string>() {null, null, null, null, null, "x", null, null, null },
+                new List<string>() {null, null, null, null, null, "x", null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+            };
+
+            var board = new Board(listBoard, "x");
+
+            var expected = new Move() { X = 5, Y = 6 };
+
+            PerformTest(board, expected);
+        }
+
+        [TestMethod()]
+        public void CanTheyWin_FourInRowColumn()
+        {
+            var listBoard = new List<List<string>>() {
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, "o", "x", null, null },
+                new List<string>() {null, null, null, null, null, "o", null, null, null },
+                new List<string>() {null, null, null, null, null, "o", null, null, null },
+                new List<string>() {null, null, null, null, null, "o", null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+            };
+
+            var board = new Board(listBoard, "x");
+
+            var expected = new Move() { X = 5, Y = 6 };
+
+            PerformTest(board, expected);
+        }
 
         [TestMethod()]
         public void CanWeWin_FourInRow_Left()
