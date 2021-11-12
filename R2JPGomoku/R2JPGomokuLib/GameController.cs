@@ -1,12 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace R2JPGomokuLib {
     public class GameController {
         public class NewGameRequest {
+            public string player_1 { get; set; }
+            public string player_2 { get; set; }
+        }
+
+        public class GameResponse {
+            public string id { get; set; }
+            public List<List<string>> board { get; set; }
+            public string next_move { get; set; }
+            public string winner { get; set; }
             public string player_1 { get; set; }
             public string player_2 { get; set; }
         }
@@ -19,10 +30,26 @@ namespace R2JPGomokuLib {
 
         }
 
-        public void PlayGame(string gameId) {
+        public void PlayGame(string gameId, string myPlayer) {
             while (true) {
-                var response = Post(HttpMethod.Get, $"view_game/{gameId}");
+                var response = Post(HttpMethod.Get, $"view_game/{gameId}").Result;
 
+                if (response.Equals("ERROR!")) {
+                    return;
+                }
+
+                var game = JsonConvert.DeserializeObject<GameResponse>(response);
+
+                if (game.winner != null) {
+                    Console.WriteLine($"Winner: {game.winner}");
+                    return;
+                }
+
+                if (game.next_move.Equals(myPlayer)) {
+                    Console.WriteLine("Make move");
+                }
+
+                Thread.Sleep(1000);
             }
         }
 

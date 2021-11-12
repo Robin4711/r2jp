@@ -10,6 +10,7 @@ namespace R2JPGomokuConsole {
                     await new GameController().NewGame(args[1], args[2], args[3]);
                     break;
                 case "play":
+                    new GameController().PlayGame(args[1], args[2]);
                     break;
                 default:
                     break;
