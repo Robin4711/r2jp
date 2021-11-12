@@ -37,6 +37,18 @@ namespace R2JPGomokuLib {
             return board;
         }
 
+        public List<List<string>> Columns() {
+            var columns = new List<List<string>>();
+            for (int i = 0; i < board.Count; i++) {
+                var c = new List<string>();
+                for (int j = 0; j < board.Count; j++) {
+                    c.Add(board[j][i]);
+                }
+                columns.Add(c);
+            }
+            return columns;
+        }
+
         public Move NextMove() {
             var rowsAsStrings = Rows().Select(r => String.Join(string.Empty, r)+"R").ToList();
             var y = 0;
