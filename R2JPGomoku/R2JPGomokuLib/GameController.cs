@@ -41,7 +41,7 @@ namespace R2JPGomokuLib {
 
         }
 
-        public async Task PlayGame(string gameId, string myPlayer) {
+        public async Task PlayGame(string gameId, string myPlayer, string marker) {
             while (true) {
                 var response = Post(HttpMethod.Get, $"view_game/{gameId}").Result;
 
@@ -57,7 +57,7 @@ namespace R2JPGomokuLib {
                 }
 
                 if (game.next_move.Equals(myPlayer)) {
-                    var board = new Board(game.board);
+                    var board = new Board(game.board, marker);
                     var move = board.NextMove();
                     var data = new MoveRequest() { player = myPlayer, x = move.X, y = move.Y };
                     string json = JsonConvert.SerializeObject(data);

@@ -6,6 +6,7 @@ using System.Text;
 namespace R2JPGomokuLib {
     public class Board {
         private readonly List<List<string>> board;
+        private readonly string playCharacter;
 
         public class Move {
             public int X { get; set; }
@@ -14,7 +15,7 @@ namespace R2JPGomokuLib {
 
         
 
-        public Board(List<List<string>> board) {
+        public Board(List<List<string>> board, string playCharacter) {
             
             foreach(var row in board)
             {
@@ -25,6 +26,7 @@ namespace R2JPGomokuLib {
                 }
             }
             this.board = board;
+            this.playCharacter = playCharacter;
         }
 
         public List<List<string>> Rows() {
