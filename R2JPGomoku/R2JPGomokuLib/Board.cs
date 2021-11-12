@@ -16,10 +16,7 @@ namespace R2JPGomokuLib {
         
 
         public Board(List<List<string>> board, string playCharacter) {
-<<<<<<< HEAD
             this.playCharacter = playCharacter;
-=======
->>>>>>> make_move
             
             foreach(var row in board)
             {
@@ -34,7 +31,6 @@ namespace R2JPGomokuLib {
                 }
             }
             this.board = board;
-            this.playCharacter = playCharacter;
         }
 
         public List<List<string>> Rows() {
