@@ -6,6 +6,7 @@ using System.Text;
 namespace R2JPGomokuLib {
     public class Board {
         private readonly List<List<string>> board;
+        private readonly string playCharacter;
 
         public class Move {
             public int X { get; set; }
@@ -14,7 +15,8 @@ namespace R2JPGomokuLib {
 
         
 
-        public Board(List<List<string>> board) {
+        public Board(List<List<string>> board, string playCharacter) {
+            this.playCharacter = playCharacter;
             
             foreach(var row in board)
             {
@@ -22,6 +24,10 @@ namespace R2JPGomokuLib {
                 {
                     if (row[i] == null)
                         row[i] = "-";
+                    else if (row[i] == playCharacter)
+                        row[i] = "m";
+                    else
+                        row[i] = "p";
                 }
             }
             this.board = board;
@@ -37,18 +43,33 @@ namespace R2JPGomokuLib {
             var x = 0;
             for (int i = 0; i < rowsAsStrings.Count(); i++)
             {
-                x = xOfFoundNextMove(rowsAsStrings[i], "xxxx-");
+                x = xOfFoundNextMove(rowsAsStrings[i], "mmmm-");
                 if (x != -1)
                 {
                     y = i;
                     return new Move { X = x, Y = y };
                 }
-                x = xOfFoundNextMove(rowsAsStrings[i], "-xxxx");
+                x = xOfFoundNextMove(rowsAsStrings[i], "-mmmm");
                 if (x != -1)
                 {
                     y = i;
                     return new Move { X = x, Y = y };
                 }
+
+                x = xOfFoundNextMove(rowsAsStrings[i], "-mp");
+                if (x != -1)
+                {
+                    y = i;
+                    return new Move { X = x, Y = y };
+                }
+
+                x = xOfFoundNextMove(rowsAsStrings[i], "p-");
+                if (x != -1)
+                {
+                    y = i;
+                    return new Move { X = x, Y = y };
+                }
+
             }
 
             return new Move() { X =  Rows().First().Count / 2,  Y = Rows().Count / 2 } ;

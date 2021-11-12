@@ -19,9 +19,51 @@ namespace R2JPGomokuLib.Tests {
                 new List<string>() { null, null, null, null, null, null }
             };
 
-            var board = new Board(listBoard);
+            var board = new Board(listBoard, "x");
 
             var expected = new Move() { X = 3, Y = 3 };
+
+            PerformTest(board, expected);
+        }
+
+        [TestMethod()]
+        public void Test_EmptySpot()
+        {
+            var listBoard = new List<List<string>>() {
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { null, null, null, "o", null, null },
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null }
+            };
+
+            var board = new Board(listBoard, "x");
+
+            var expected = new Move() { X = 4, Y = 2};
+
+            PerformTest(board, expected);
+        }
+
+
+        [TestMethod()]
+        public void Test_AddNextToOurPrevious()
+        {
+            var listBoard = new List<List<string>>() {
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, "x", "o", null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {null, null, null, null, null, null, null, null, null },
+            };
+
+            var board = new Board(listBoard, "x");
+
+            var expected = new Move() { X = 4, Y = 2 };
 
             PerformTest(board, expected);
         }
@@ -38,7 +80,7 @@ namespace R2JPGomokuLib.Tests {
                 new List<string>() { null, null, null, null, null, null }
             };
 
-            var board = new Board(listBoard);
+            var board = new Board(listBoard, "x");
 
             var expected = new Move() { X = 4, Y = 2 };
 
@@ -57,7 +99,7 @@ namespace R2JPGomokuLib.Tests {
                 new List<string>() { null, null, null, null, null, null }
             };
 
-            var board = new Board(listBoard);
+            var board = new Board(listBoard, "x");
 
             var expected = new Move() { X = 1, Y = 2 };
 
