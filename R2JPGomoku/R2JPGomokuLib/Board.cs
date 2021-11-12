@@ -52,93 +52,74 @@ namespace R2JPGomokuLib {
         public Move NextMove() {
             var rowsAsStrings = Rows().Select(r => String.Join(string.Empty, r)+"R").ToList();
             var colsAsStrings = Columns().Select(r => String.Join(string.Empty, r) + "C").ToList();
-            var y = 0;
-            var x = 0;
-            for (int i = 0; i < rowsAsStrings.Count(); i++)
-            {
-                x = xOfFoundNextMove(rowsAsStrings[i], "mmmm-");
-                if (x != -1)
-                {
-                    y = i;
-                    return new Move { X = x, Y = y };
-                }
-                x = xOfFoundNextMove(rowsAsStrings[i], "-mmmm");
-                if (x != -1)
-                {
-                    y = i;
-                    return new Move { X = x, Y = y };
-                }
+            Move x = null;
 
-                x = xOfFoundNextMove(rowsAsStrings[i], "pppp-");
-                if (x != -1)
+            var patterns = new List<string>() {
+                "mmmm-",
+                "m-mmm", 
+                "mm-mm", 
+                "mmm-m", 
+                "-mmmm", 
+                "p-ppp",  
+                "pp-pp", 
+                "ppp-p", 
+                "-pppp", 
+                "pppp-",
+                "-mmm",
+                "m-mm",
+                "mm-m",
+                "mmm-", 
+                "ppp-", 
+                "-ppp", 
+                "pp-p",
+                "p-pp",
+                "mm-", 
+                "-mm",
+                "m-m",
+                "pp-", 
+                "-pp", 
+                "-m",
+                "m-", 
+                "p-", 
+                "-p" };
+            foreach (var pattern in patterns) {
+                for (int i = 0; i < rowsAsStrings.Count(); i++)
                 {
-                    y = i;
-                    return new Move { X = x, Y = y };
+                    x = xOfFoundNextMove(rowsAsStrings[i], pattern, i);
+                    if (x != null)
+                    {
+                        return x;
+                    }
+                    x = xOfFoundNextMove(colsAsStrings[i], pattern, i);
+                    if (x != null)
+                    {
+                        return x;
+                    }
                 }
-
-                x = xOfFoundNextMove(rowsAsStrings[i], "-pppp");
-                if (x != -1)
-                {
-                    y = i;
-                    return new Move { X = x, Y = y };
-                }
-
-                x = xOfFoundNextMove(rowsAsStrings[i], "ppp-");
-                if (x != -1)
-                {
-                    y = i;
-                    return new Move { X = x, Y = y };
-                }
-
-                x = xOfFoundNextMove(rowsAsStrings[i], "-ppp");
-                if (x != -1)
-                {
-                    y = i;
-                    return new Move { X = x, Y = y };
-                }
-
-                x = xOfFoundNextMove(rowsAsStrings[i], "pp-");
-                if (x != -1)
-                {
-                    y = i;
-                    return new Move { X = x, Y = y };
-                }
-
-                x = xOfFoundNextMove(rowsAsStrings[i], "-pp");
-                if (x != -1)
-                {
-                    y = i;
-                    return new Move { X = x, Y = y };
-                }
-
-                x = xOfFoundNextMove(rowsAsStrings[i], "-mp");
-                if (x != -1)
-                {
-                    y = i;
-                    return new Move { X = x, Y = y };
-                }
-
-                x = xOfFoundNextMove(rowsAsStrings[i], "p-");
-                if (x != -1)
-                {
-                    y = i;
-                    return new Move { X = x, Y = y };
-                }
-
             }
+               
 
             return new Move() { X =  Rows().First().Count / 2,  Y = Rows().Count / 2 } ;
         }
 
-        private int xOfFoundNextMove(string row, string pattern)
+        private Move xOfFoundNextMove(string row, string pattern, int i)
         {
             if (row.Contains(pattern))
             {
                 var offset = pattern.IndexOf("-");
-                return row.IndexOf(pattern) + offset;
+
+                if (row.Contains("R"))
+                {
+                    return new Move { X = row.IndexOf(pattern) + offset, Y = i };
+                }
+                else
+                {
+                    return new Move { X = i, Y = row.IndexOf(pattern) + offset };
+
+                }
 
             }
-            return -1;
+            return null;
         }
 
     }
