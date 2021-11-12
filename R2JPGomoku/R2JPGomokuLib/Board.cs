@@ -51,6 +51,7 @@ namespace R2JPGomokuLib {
 
         public Move NextMove() {
             var rowsAsStrings = Rows().Select(r => String.Join(string.Empty, r)+"R").ToList();
+            var colsAsStrings = Columns().Select(r => String.Join(string.Empty, r) + "C").ToList();
             var y = 0;
             var x = 0;
             for (int i = 0; i < rowsAsStrings.Count(); i++)
