@@ -60,9 +60,9 @@ namespace R2JPGomokuLib {
                     var board = new Board(game.board, marker);
                     var move = board.NextMove();
                     var data = new MoveRequest() { player = myPlayer, x = move.X, y = move.Y };
-                    string json = JsonConvert.SerializeObject(data);
-                    await Post(HttpMethod.Put, $"play_game/{gameId}", json);
-                    Console.Write(Post(HttpMethod.Get, $"view_game/{gameId}").Result);
+                    //string json = JsonConvert.SerializeObject(data);
+                    var res = Post(HttpMethod.Put, $"play_game/{gameId}", data).Result;
+                    Console.Write(res);
                 }
 
                 Thread.Sleep(1000);

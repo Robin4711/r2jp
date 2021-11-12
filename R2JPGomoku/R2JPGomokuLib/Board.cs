@@ -49,6 +49,12 @@ namespace R2JPGomokuLib {
             return columns;
         }
 
+        public List<List<string>> LeftDiagonals() {
+            var diagonals = new List<List<string>>();
+
+            return diagonals;
+        }
+
         public Move NextMove() {
             var rowsAsStrings = Rows().Select(r => String.Join(string.Empty, r)+"R").ToList();
             var colsAsStrings = Columns().Select(r => String.Join(string.Empty, r) + "C").ToList();
