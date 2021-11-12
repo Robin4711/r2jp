@@ -22,6 +22,17 @@ namespace R2JPGomokuLib {
             public string player_2 { get; set; }
         }
 
+        public class MoveRequest {
+            public string player { get; set; }
+            public int x { get; set; }
+            public int y { get; set; }
+        }
+
+        public void ViewGame(string gameId) {
+            var response = Post(HttpMethod.Get, $"view_game/{gameId}").Result;
+            Console.Write(response);
+        }
+
 
         public async Task NewGame(string gameId, string player1, string player2) {
             var data = new NewGameRequest { player_1 = player1, player_2 = player2 };
@@ -30,7 +41,7 @@ namespace R2JPGomokuLib {
 
         }
 
-        public void PlayGame(string gameId, string myPlayer) {
+        public async Task PlayGame(string gameId, string myPlayer) {
             while (true) {
                 var response = Post(HttpMethod.Get, $"view_game/{gameId}").Result;
 
@@ -46,7 +57,12 @@ namespace R2JPGomokuLib {
                 }
 
                 if (game.next_move.Equals(myPlayer)) {
-                    Console.WriteLine("Make move"); 
+                    var board = new Board(game.board);
+                    var move = board.NextMove();
+                    var data = new MoveRequest() { player = myPlayer, x = move.X, y = move.Y };
+                    string json = JsonConvert.SerializeObject(data);
+                    await Post(HttpMethod.Put, $"play_game/{gameId}", json);
+                    Console.Write(Post(HttpMethod.Get, $"view_game/{gameId}").Result);
                 }
 
                 Thread.Sleep(1000);
