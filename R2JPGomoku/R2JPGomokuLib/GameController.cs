@@ -46,7 +46,7 @@ namespace R2JPGomokuLib {
                 }
 
                 if (game.next_move.Equals(myPlayer)) {
-                    Console.WriteLine("Make move");
+                    Console.WriteLine("Make move"); 
                 }
 
                 Thread.Sleep(1000);
