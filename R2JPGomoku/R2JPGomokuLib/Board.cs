@@ -51,13 +51,39 @@ namespace R2JPGomokuLib {
 
         public List<List<string>> LeftDiagonals() {
             var diagonals = new List<List<string>>();
+            var length = board.Count;
 
+            diagonals.Add(GetDiagonal(board, 0, 0, 1, 1));
+            diagonals.Add(GetDiagonal(board, 0, length-1, -1, 1));
+
+            for (int i = 1; i < length; i++) {
+                diagonals.Add(GetDiagonal(board, i, 0, 1, 1));
+                diagonals.Add(GetDiagonal(board, 0, i, 1, 1));
+                diagonals.Add(GetDiagonal(board, 0, i, -1, 1));
+                diagonals.Add(GetDiagonal(board, i, length-1, -1, 1));
+            }
             return diagonals;
+        }
+
+        private List<string> GetDiagonal(List<List<string>> board, int x, int y, int stepX, int stepY) {
+            var result = new List<string>();
+            var i = x;
+            var j = y;
+            var min = 0;
+            var max = board.Count-1;
+
+            while (min <= i && min <= j && i <= max && j <= max) {
+                result.Add(board[j][i]);
+                i = i + stepX;
+                j = j + stepY;
+            }
+            return result;
         }
 
         public Move NextMove() {
             var rowsAsStrings = Rows().Select(r => String.Join(string.Empty, r)+"R").ToList();
             var colsAsStrings = Columns().Select(r => String.Join(string.Empty, r) + "C").ToList();
+            var diagonalsAsStrings = LeftDiagonals().Select(r => String.Join(string.Empty, r) + "D").ToList();
             Move x = null;
 
             var patterns = new List<string>() {
