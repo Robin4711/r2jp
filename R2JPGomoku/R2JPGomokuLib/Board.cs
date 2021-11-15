@@ -99,50 +99,125 @@ namespace R2JPGomokuLib {
             return result;
         }
 
-        public Move NextMoveByCells() {
+        public Move NextMoveByCells(IList<string> injectedPatterns = null) {
             var rowsAsStrings = RowsAsCellLists().Select(r => r.ToString()).ToList();
             var colsAsStrings = ColumnsAsCellLists().Select(c => c.ToString()).ToList();
             var diagonalsAsStrings = Diagonals().Select(d => d.ToString()).ToList();
 
-            var sequences = RowsAsCellLists().Concat(ColumnsAsCellLists()).Concat(Diagonals());
+            var sequences = Diagonals().Concat(ColumnsAsCellLists()).Concat(RowsAsCellLists());
 
-            var patterns = new List<string>() {
-                "mmmm-",
+            var patterns = injectedPatterns ?? new List<string>() {
+                "-mmmm",
                 "m-mmm",
                 "mm-mm",
                 "mmm-m",
-                "-mmmm",
+                "mmmm-",
+
+                "-pppp",
                 "p-ppp",
                 "pp-pp",
                 "ppp-p",
-                "-pppp",
                 "pppp-",
-                "-mmm",
-                "m-mm",
-                "mm-m",
-                "mmm-",
-                "ppp-",
-                "-ppp",
-                "pp-p",
-                "p-pp",
-                "mm-",
+
+                "=-=mmm",
+                "mmm=-=",
+                "=-mmm=",
+                "=mmm-=",
+
+                "=-=ppp",
+                "ppp=-=",
+                "=-ppp=",
+                "=ppp-=",
+
+                "=mm-m=",
+                "=m-mm=",
+
+                "mm=m-",
+                "-m=mm",
+
+
+                "m-=mm",
+                "mm=-m",
+
+                "p=p-p=p",
+
+                "=pp-p=",
+                "=p-pp=",
+
+                "pp=p-",
+                "-p=pp",
+
+
+                "p-=pp",
+                "pp=-p",
+
+                "p=p-p=p",
+
+                "-=m=m=m",
+                "m=m=m=-",
+
+                "m-m=m",
+                "m=m-m",
+
+                "=-=mm=",
+                "=mm=-=",
+                "=-=mm",
+                "mm=-=",
+                "=-mm=",
+                "=mm-=",
+
+
+                "-=m=m=m",
+                "m=m=m=-",
+
+                "m-m=m",
+                "m=m-m",
+
+                "==-pp=",
+                "=pp-==",
+                "=-=pp",
+                "pp=-=",
+                "=-pp=",
+                "=pp-=",
+                "==-p=",
+                "=-p==",
+
+                "=m=m=-=",
+                "=-=m=m=",
+
+                "=m=m-=",
+                "=-m=m=",
+
+                "=-=m=",
+                "=m=-=",
+                "==-m=",
+                "=-m==",
+                
                 "-mm",
+                "mm-",
                 "m-m",
-                "pp-",
+
                 "-pp",
+                "pp-",
+                "p-p",
+
                 "-m",
                 "m-",
+
+                "-p",
                 "p-",
-                "-p" };
+
+            };
 
             foreach (var pattern in patterns) {
-                var rs = RowsAsCellLists();
+                var searchPattern = pattern.Replace('=', '-');
+                var rs = sequences;
                 var debug = rs.Select(r => r.ToStringExt());
-                var matches = sequences.Where(r => r.ToStringExt().Contains(pattern)).ToList();
+                var matches = sequences.Where(r => r.ToStringExt().Contains(searchPattern)).ToList();
                 if (matches.Count() > 0) {
                     var r = matches.First();
                     var s = r.ToStringExt();
-                    var start = s.IndexOf(pattern);
+                    var start = s.IndexOf(searchPattern);
                     var offset = pattern.IndexOf("-");
                     var c = r[start + offset];
 
