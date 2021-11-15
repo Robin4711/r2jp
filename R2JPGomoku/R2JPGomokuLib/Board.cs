@@ -125,8 +125,12 @@ namespace R2JPGomokuLib {
                 "-ppp",
                 "pp-p",
                 "p-pp",
+                "mm=-",
                 "mm-",
+                "-=mm",
                 "-mm",
+                "m=m-",
+                "-m=m",
                 "m-m",
                 "pp-",
                 "-pp",
@@ -136,13 +140,14 @@ namespace R2JPGomokuLib {
                 "-p" };
 
             foreach (var pattern in patterns) {
-                var rs = RowsAsCellLists();
+                var searchPattern = pattern.Replace('=', '-');
+                var rs = sequences;
                 var debug = rs.Select(r => r.ToStringExt());
-                var matches = sequences.Where(r => r.ToStringExt().Contains(pattern)).ToList();
+                var matches = sequences.Where(r => r.ToStringExt().Contains(searchPattern)).ToList();
                 if (matches.Count() > 0) {
                     var r = matches.First();
                     var s = r.ToStringExt();
-                    var start = s.IndexOf(pattern);
+                    var start = s.IndexOf(searchPattern);
                     var offset = pattern.IndexOf("-");
                     var c = r[start + offset];
 

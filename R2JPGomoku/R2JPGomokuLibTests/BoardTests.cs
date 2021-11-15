@@ -237,7 +237,7 @@ namespace R2JPGomokuLib.Tests
             var listBoard = new List<List<string>>() {
                 new List<string>() { null, null, null, null, null, null, null },
                 new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, "o", "o", null, null , null },
+                new List<string>() { null, null, "x", "x", null, null , null },
                 new List<string>() { null, null, null, null, null, null, null },
                 new List<string>() { null, null, null, null, null, null, null },
                 new List<string>() { null, null, null, null, null, null, null },
@@ -250,6 +250,8 @@ namespace R2JPGomokuLib.Tests
 
             PerformTest(board, expected);
         }
+
+
 
         private void PerformTest(Board board, Move expected)
         {
