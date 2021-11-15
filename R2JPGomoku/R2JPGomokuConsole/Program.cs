@@ -15,6 +15,9 @@ namespace R2JPGomokuConsole {
                 case "view":
                     new GameController().ViewGame(args[1]);
                     break;
+                case "pretty":
+                    new GameController().ViewPrettyGame(args[1]);
+                    break;
                 default:
                     break;
             }

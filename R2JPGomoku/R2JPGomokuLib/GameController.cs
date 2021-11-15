@@ -33,6 +33,11 @@ namespace R2JPGomokuLib {
             Console.Write(response);
         }
 
+        public void ViewPrettyGame(string gameId) {
+            var response = Call(HttpMethod.Get, $"view_game/{gameId}/pretty").Result;
+            Console.Write(response);
+        }
+
 
         public async Task NewGame(string gameId, string player1, string player2) {
             var data = new NewGameRequest { player_1 = player1, player_2 = player2 };
