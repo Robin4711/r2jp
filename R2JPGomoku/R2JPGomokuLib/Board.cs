@@ -191,6 +191,9 @@ namespace R2JPGomokuLib {
             var rowsAsStrings = RowsAsCellLists().Select(r => r.ToString()).ToList();
             var colsAsStrings = ColumnsAsCellLists().Select(c => c.ToString()).ToList();
             var diagonalsAsStrings = Diagonals().Select(d => d.ToString()).ToList();
+
+            var sequences = RowsAsCellLists().Concat(ColumnsAsCellLists()).Concat(Diagonals());
+
             Move x = null;
 
             var patterns = new List<string>() {
@@ -221,11 +224,18 @@ namespace R2JPGomokuLib {
                 "m-",
                 "p-",
                 "-p" };
-            Cell c = null;
+
             foreach (var pattern in patterns) {
-                var matches = RowsAsCellLists().Where(r => r.ToString().Contains(pattern));
+                var rs = RowsAsCellLists();
+                var debug = rs.Select(r => r.ToStringExt());
+                var matches = sequences.Where(r => r.ToStringExt().Contains(pattern)).ToList();
                 if (matches.Count() > 0) {
-                    c = matches.First().Single(c => c.Equals("-"));
+                    var r = matches.First();
+                    var s = r.ToStringExt();
+                    var start = s.IndexOf(pattern);
+                    var offset = pattern.IndexOf("-");
+                    var c = r[start + offset];
+
                     return new Move(c.X, c.Y);
                 }
             }

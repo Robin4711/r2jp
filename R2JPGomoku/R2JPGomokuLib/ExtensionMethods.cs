@@ -5,7 +5,7 @@ using System.Text;
 
 namespace R2JPGomokuLib {
     public static class ExtensionMethods {
-        public static string ToString(this IList<Cell> self) {
+        public static string ToStringExt(this IList<Cell> self) {
             return String.Join(String.Empty, self.Select(c => c.Value));
         }
     }
