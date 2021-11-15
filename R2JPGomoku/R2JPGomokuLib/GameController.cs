@@ -58,7 +58,7 @@ namespace R2JPGomokuLib {
 
                 if (game.next_move.Equals(myPlayer)) {
                     var board = new Board(game.board, marker);
-                    var move = board.NextMove();
+                    var move = board.NextMoveByCells();
                     var data = new MoveRequest() { player = myPlayer, x = move.X, y = move.Y };
                     //string json = JsonConvert.SerializeObject(data);
                     var res = Call(HttpMethod.Put, $"play_game/{gameId}", data).Result;
