@@ -234,7 +234,7 @@ namespace R2JPGomokuLib.Tests
 
         private void PerformTest(Board board, Move expected)
         {
-            var actual = board.NextMove();
+            var actual = board.NextMoveByCells();
             Assert.AreEqual(expected.X, actual.X, "X");
             Assert.AreEqual(expected.Y, actual.Y, "Y");
         }
