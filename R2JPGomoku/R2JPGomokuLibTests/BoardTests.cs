@@ -232,6 +232,25 @@ namespace R2JPGomokuLib.Tests
             PerformTest(board, expected);
         }
 
+        [TestMethod()]
+        public void Offensive_SetFourWithAGap() {
+            var listBoard = new List<List<string>>() {
+                new List<string>() { null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null },
+                new List<string>() { null, null, "o", "o", null, null , null },
+                new List<string>() { null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null }
+            };
+
+            var board = new Board(listBoard, "x");
+
+            var expected = new Move() { X = 5, Y = 2 };
+
+            PerformTest(board, expected);
+        }
+
         private void PerformTest(Board board, Move expected)
         {
             var actual = board.NextMoveByCells();
