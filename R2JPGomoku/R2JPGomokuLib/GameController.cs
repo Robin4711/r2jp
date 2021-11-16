@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 
 namespace R2JPGomokuLib {
     public class GameController {
+        private readonly IGameWriter gameWriter;
+
         public class NewGameRequest {
             public string player_1 { get; set; }
             public string player_2 { get; set; }
@@ -28,14 +30,18 @@ namespace R2JPGomokuLib {
             public int y { get; set; }
         }
 
+        public GameController(IGameWriter gameWriter) {
+            this.gameWriter = gameWriter;
+        }
+
         public void ViewGame(string gameId) {
             var response = Call(HttpMethod.Get, $"view_game/{gameId}").Result;
-            Console.Write(response);
+            gameWriter.WriteGame(response);
         }
 
         public void ViewPrettyGame(string gameId) {
             var response = Call(HttpMethod.Get, $"view_game/{gameId}/pretty").Result;
-            Console.Write(response);
+            gameWriter.WriteGame(response);
         }
 
 
@@ -43,7 +49,7 @@ namespace R2JPGomokuLib {
             var data = new NewGameRequest { player_1 = player1, player_2 = player2 };
 
             var response = Call(HttpMethod.Post, $"new_game/{gameId}", data).Result;
-            return response;
+            gameWriter.WriteGame(response);
         }
 
         public async Task EndGame(string gameId) {
@@ -61,7 +67,7 @@ namespace R2JPGomokuLib {
                 var game = JsonConvert.DeserializeObject<GameResponse>(response);
 
                 if (game.winner != null) {
-                    Console.WriteLine($"Winner: {game.winner}");
+                    gameWriter.WriteGame($"Winner: {game.winner}");
                     return;
                 }
 
@@ -72,7 +78,7 @@ namespace R2JPGomokuLib {
                     //string json = JsonConvert.SerializeObject(data);
                     var res = Call(HttpMethod.Put, $"play_game/{gameId}", data).Result;
                     res = Call(HttpMethod.Get, $"view_game/{gameId}/pretty").Result;
-                    Console.Write(res);
+                    gameWriter.WriteGame(res);
                 }
 
                 Thread.Sleep(1000);
