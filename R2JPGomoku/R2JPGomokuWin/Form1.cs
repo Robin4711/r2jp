@@ -19,7 +19,7 @@ namespace R2JPGomokuWin {
             var command = comboBox1.Text.Split(" ");
             switch (command[0]) {
                 case "new_game":
-                    new GameController().NewGame(command[0], command[1], command[2]);
+                    var response = new GameController().NewGame(command[0], command[1], command[2]);
                     break;
                 case "end_game":
                     new GameController().EndGame(command[0]);

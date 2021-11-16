@@ -39,11 +39,11 @@ namespace R2JPGomokuLib {
         }
 
 
-        public async Task NewGame(string gameId, string player1, string player2) {
+        public async Task<string> NewGame(string gameId, string player1, string player2) {
             var data = new NewGameRequest { player_1 = player1, player_2 = player2 };
 
-            await Call(HttpMethod.Post, $"new_game/{gameId}", data);
-
+            var response = Call(HttpMethod.Post, $"new_game/{gameId}", data).Result;
+            return response;
         }
 
         public async Task EndGame(string gameId) {
