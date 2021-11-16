@@ -46,6 +46,10 @@ namespace R2JPGomokuLib {
 
         }
 
+        public async Task EndGame(string gameId) {
+            await Call(HttpMethod.Post, $"end_game/{gameId}");
+        }
+
         public async Task PlayGame(string gameId, string myPlayer, string marker) {
             while (true) {
                 var response = Call(HttpMethod.Get, $"view_game/{gameId}").Result;
