@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -41,15 +42,21 @@ namespace R2JPGomokuLib {
 
         public void ViewPrettyGame(string gameId) {
             var response = Call(HttpMethod.Get, $"view_game/{gameId}/pretty").Result;
-            gameWriter.WriteGame(response);
+            gameWriter.WriteGamePretty(response);
         }
 
 
         public async Task<string> NewGame(string gameId, string player1, string player2) {
             var data = new NewGameRequest { player_1 = player1, player_2 = player2 };
-
-            var response = Call(HttpMethod.Post, $"new_game/{gameId}", data).Result;
-            gameWriter.WriteGame(response);
+            string response;
+            try {
+                response = await Call(HttpMethod.Post, $"new_game/{gameId}", data);
+                gameWriter.WriteGame(response);
+            }
+            catch (Exception) {
+                throw;
+            }
+            return response;
         }
 
         public async Task EndGame(string gameId) {
@@ -61,13 +68,14 @@ namespace R2JPGomokuLib {
                 var response = Call(HttpMethod.Get, $"view_game/{gameId}").Result;
 
                 if (response.Equals("ERROR!")) {
+                    gameWriter.WriteError(response);
                     return;
                 }
 
                 var game = JsonConvert.DeserializeObject<GameResponse>(response);
 
                 if (game.winner != null) {
-                    gameWriter.WriteGame($"Winner: {game.winner}");
+                    gameWriter.WriteWinner(game.winner);
                     return;
                 }
 
@@ -77,8 +85,9 @@ namespace R2JPGomokuLib {
                     var data = new MoveRequest() { player = myPlayer, x = move.X, y = move.Y };
                     //string json = JsonConvert.SerializeObject(data);
                     var res = Call(HttpMethod.Put, $"play_game/{gameId}", data).Result;
-                    res = Call(HttpMethod.Get, $"view_game/{gameId}/pretty").Result;
                     gameWriter.WriteGame(res);
+                    var pretty = Call(HttpMethod.Get, $"view_game/{gameId}/pretty").Result;
+                    gameWriter.WriteGamePretty(pretty);
                 }
 
                 Thread.Sleep(1000);
@@ -92,8 +101,19 @@ namespace R2JPGomokuLib {
 
             request.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
+
+            var debug = JsonConvert.SerializeObject(request);
+            File.WriteAllText(@"C:\Temp\debug.txt", debug);
             HttpClient http = new HttpClient();
-            HttpResponseMessage response = await http.SendAsync(request);
+            HttpResponseMessage response;
+            try {
+                 response = await http.SendAsync(request);
+            }
+            catch (Exception) {
+
+                throw new ApplicationException("fooBAR");
+            }
+     
 
             var result = "";
             if (response.IsSuccessStatusCode) {
