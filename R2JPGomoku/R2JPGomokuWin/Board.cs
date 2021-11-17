@@ -36,6 +36,7 @@ namespace R2JPGomokuWin {
 
 
         public void DrawBoard(GameResponse response) {
+            panel.SuspendLayout();
             var size = response.board.Count;
             var offset = 45;
             if (cells == null || !cells.Count.Equals(size)) {
@@ -63,6 +64,7 @@ namespace R2JPGomokuWin {
                     cells[y][x].Button.Text = response.board[y][x] ?? "-";
                 }
             }
+            panel.ResumeLayout();
         }
 
         private async void CellClicked(object sender, EventArgs e) {

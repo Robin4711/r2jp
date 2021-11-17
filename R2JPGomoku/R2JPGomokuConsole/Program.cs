@@ -12,13 +12,13 @@ namespace R2JPGomokuConsole {
                     await gameController.NewGame(args[1], args[2], args[3]);
                     break;
                 case "play":
-                    await gameController.PlayGame(args[1], args[2], args[3]);
+                    await gameController.PlayGame(args[1], args[2], true);
                     break;
                 case "view":
-                    gameController.ViewGame(args[1]);
+                    await gameController.ViewGame();
                     break;
                 case "pretty":
-                    gameController.ViewPrettyGame(args[1]);
+                    await gameController.ViewPrettyGame(args[1]);
                     break;
                 default:
                     break;

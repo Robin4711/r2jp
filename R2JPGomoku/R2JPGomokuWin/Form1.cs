@@ -19,10 +19,6 @@ namespace R2JPGomokuWin {
             InitializeComponent();
         }
 
-        private string gameId;
-        private string player;
-        private string marker;
-
         private GameController GetGameController(string gameId, string player, Panel panel) {
             var board = new Board(panel, null, gameId, player);
             var gameWriter = new GameWriterWin(board);
@@ -47,12 +43,6 @@ namespace R2JPGomokuWin {
                     var response1 = controller.EndGame(gameId);
                     var response2 = controller.NewGame(gameId, player1, player2);
                     break;
-                case "connect":
-                    gameId = command[1];
-                    player = command[2];
-                    marker = command[3];
-                    var connectResult = GetGameController(gameId, player, panel1).Connect(gameId, player, marker);
-                    break;
                 case "end_game":
                     gameId = command[1];
                     await GetGameController(gameId, "foobar", panel1).EndGame(gameId);
@@ -60,14 +50,12 @@ namespace R2JPGomokuWin {
                 case "manual":
                     gameId = command[1];
                     player = command[2];
-                    marker = command[3];
-                    await GetGameController(gameId, player, panel1).Connect(gameId, player, marker);
+                    await GetGameController(gameId, player, panel1).PlayGame(gameId, player, false);
                     break;
                 case "robot":
                     gameId = command[1];
                     player = command[2];
-                    marker = command[3];
-                    await GetGameController(gameId, player, panel1).PlayGame(gameId, player, marker);
+                    await GetGameController(gameId, player, panel1).PlayGame(gameId, player, true);
                     break;
                 default:
                     break;

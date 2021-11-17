@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 namespace R2JPGomokuLib {
     public class GameController {
         private readonly IGameWriter gameWriter;
+        private bool canMakeMove = false;
 
         public class NewGameRequest {
             public string player_1 { get; set; }
@@ -35,33 +36,25 @@ namespace R2JPGomokuLib {
             this.gameWriter = gameWriter;
         }
 
-        public void ViewGame(string gameId) {
-            var response = Call(HttpMethod.Get, $"view_game/{gameId}").Result;
-            gameWriter.WriteGame(response);
-        }
-
-        public void ViewPrettyGame(string gameId) {
-            var response = Call(HttpMethod.Get, $"view_game/{gameId}/pretty").Result;
+        public async Task ViewPrettyGame(string gameId) {
+            var response = await Call(HttpMethod.Get, $"view_game/{gameId}/pretty");
             gameWriter.WriteGamePretty(response);
         }
 
-
-        public async Task<string> NewGame(string gameId, string player1, string player2) {
+        public async Task NewGame(string gameId, string player1, string player2) {
             var data = new NewGameRequest { player_1 = player1, player_2 = player2 };
-            string response;
-            try {
-                response = await Call(HttpMethod.Post, $"new_game/{gameId}", data);
-                gameWriter.WriteGame(response);
-            }
-            catch (Exception) {
-                throw;
-            }
-            return response;
+            var response = await Call(HttpMethod.Post, $"new_game/{gameId}", data);
+            await ViewGame(response: response);
         }
 
-        public async Task Connect(string gameId, string player, string marker) {
-            var response = await Call(HttpMethod.Get, $"view_game/{gameId}");
-            gameWriter.WriteGame(response);
+        public async Task ViewGame(string gameId = null, string response = null) {
+            if (response != null) {
+                gameWriter.WriteGame(response);
+            }
+            else if (gameId != null) {
+                response = await Call(HttpMethod.Get, $"view_game/{gameId}");
+                gameWriter.WriteGame(response);
+            }
         }
 
         public async Task EndGame(string gameId) {
@@ -70,15 +63,15 @@ namespace R2JPGomokuLib {
 
         public async Task MakeMove(string gameId, string player, int x, int y) {
             var data = new MoveRequest() { player = player, x = x, y = y };
-            //string json = JsonConvert.SerializeObject(data);
-            var res = await Call(HttpMethod.Put, $"play_game/{gameId}", data);
-            gameWriter.WriteGame(res);
+            var response = await Call(HttpMethod.Put, $"play_game/{gameId}", data);
+            canMakeMove = false;
+            gameWriter.WriteGame(response);
             var pretty = await Call(HttpMethod.Get, $"view_game/{gameId}/pretty");
             gameWriter.WriteGamePretty(pretty);
-            await Call(HttpMethod.Post, $"end_game/{gameId}");
         }
 
-        public async Task PlayGame(string gameId, string myPlayer, string marker) {
+        public async Task PlayGame(string gameId, string player, bool auto) {
+
             while (true) {
                 var response = await Call(HttpMethod.Get, $"view_game/{gameId}");
 
@@ -87,6 +80,8 @@ namespace R2JPGomokuLib {
                     return;
                 }
 
+                await ViewGame(response: response);
+
                 var game = JsonConvert.DeserializeObject<GameResponse>(response);
 
                 if (game.winner != null) {
@@ -94,11 +89,14 @@ namespace R2JPGomokuLib {
                     return;
                 }
 
-                if (game.next_move.Equals(myPlayer)) {
-                    var board = new Board(game.board, marker);
-                    var move = board.NextMoveByCells();
-                    await MakeMove(gameId, myPlayer, move.X, move.Y);
-
+                if (game.next_move.Equals(player)) {
+                    canMakeMove = true;
+                    if (auto) {
+                        var marker = player.Equals(game.player_1) ? "x" : "o";
+                        var board = new Board(game.board, marker);
+                        var move = board.NextMoveByCells();
+                        await MakeMove(gameId, player, move.X, move.Y);
+                    }
                 }
 
                 Thread.Sleep(1000);
@@ -118,13 +116,13 @@ namespace R2JPGomokuLib {
             HttpClient http = new HttpClient();
             HttpResponseMessage response;
             try {
-                 response = await http.SendAsync(request);
+                response = await http.SendAsync(request);
             }
             catch (Exception) {
 
                 throw new ApplicationException("fooBAR");
             }
-     
+
 
             var result = "";
             if (response.IsSuccessStatusCode) {
