@@ -28,12 +28,12 @@ namespace R2JPGomokuWin {
                     var response = await gameController.NewGame(command[1], command[2], command[3]);
                     break;
                 case "end_game":
-                    gameController.EndGame(command[1]);
+                    await gameController.EndGame(command[1]);
                     break;
                 case "manual":
                     break;
                 case "robot":
-                    gameController.PlayGame(command[1], command[2], command[3]);
+                    await gameController.PlayGame(command[1], command[2], command[3]);
                     break;
                 default:
                     break;
