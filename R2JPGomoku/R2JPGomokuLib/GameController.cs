@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -41,14 +42,25 @@ namespace R2JPGomokuLib {
 
         public void ViewPrettyGame(string gameId) {
             var response = Call(HttpMethod.Get, $"view_game/{gameId}/pretty").Result;
-            gameWriter.WriteGame(response);
+            gameWriter.WriteGamePretty(response);
         }
 
 
         public async Task<string> NewGame(string gameId, string player1, string player2) {
             var data = new NewGameRequest { player_1 = player1, player_2 = player2 };
+            string response;
+            try {
+                response = await Call(HttpMethod.Post, $"new_game/{gameId}", data);
+                gameWriter.WriteGame(response);
+            }
+            catch (Exception) {
+                throw;
+            }
+            return response;
+        }
 
-            var response = Call(HttpMethod.Post, $"new_game/{gameId}", data).Result;
+        public async Task Connect(string gameId, string player, string marker) {
+            var response = await Call(HttpMethod.Get, $"view_game/{gameId}");
             gameWriter.WriteGame(response);
         }
 
@@ -56,29 +68,37 @@ namespace R2JPGomokuLib {
             await Call(HttpMethod.Post, $"end_game/{gameId}");
         }
 
+        public async Task MakeMove(string gameId, string player, int x, int y) {
+            var data = new MoveRequest() { player = player, x = x, y = y };
+            //string json = JsonConvert.SerializeObject(data);
+            var res = await Call(HttpMethod.Put, $"play_game/{gameId}", data);
+            gameWriter.WriteGame(res);
+            var pretty = await Call(HttpMethod.Get, $"view_game/{gameId}/pretty");
+            gameWriter.WriteGamePretty(pretty);
+            await Call(HttpMethod.Post, $"end_game/{gameId}");
+        }
+
         public async Task PlayGame(string gameId, string myPlayer, string marker) {
             while (true) {
-                var response = Call(HttpMethod.Get, $"view_game/{gameId}").Result;
+                var response = await Call(HttpMethod.Get, $"view_game/{gameId}");
 
                 if (response.Equals("ERROR!")) {
+                    gameWriter.WriteError(response);
                     return;
                 }
 
                 var game = JsonConvert.DeserializeObject<GameResponse>(response);
 
                 if (game.winner != null) {
-                    gameWriter.WriteGame($"Winner: {game.winner}");
+                    gameWriter.WriteWinner(game.winner);
                     return;
                 }
 
                 if (game.next_move.Equals(myPlayer)) {
                     var board = new Board(game.board, marker);
                     var move = board.NextMoveByCells();
-                    var data = new MoveRequest() { player = myPlayer, x = move.X, y = move.Y };
-                    //string json = JsonConvert.SerializeObject(data);
-                    var res = Call(HttpMethod.Put, $"play_game/{gameId}", data).Result;
-                    res = Call(HttpMethod.Get, $"view_game/{gameId}/pretty").Result;
-                    gameWriter.WriteGame(res);
+                    await MakeMove(gameId, myPlayer, move.X, move.Y);
+
                 }
 
                 Thread.Sleep(1000);
@@ -92,8 +112,19 @@ namespace R2JPGomokuLib {
 
             request.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
+
+            var debug = JsonConvert.SerializeObject(request);
+            File.WriteAllText(@"C:\Temp\debug.txt", debug);
             HttpClient http = new HttpClient();
-            HttpResponseMessage response = await http.SendAsync(request);
+            HttpResponseMessage response;
+            try {
+                 response = await http.SendAsync(request);
+            }
+            catch (Exception) {
+
+                throw new ApplicationException("fooBAR");
+            }
+     
 
             var result = "";
             if (response.IsSuccessStatusCode) {

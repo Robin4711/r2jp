@@ -31,13 +31,18 @@ namespace R2JPGomokuWin {
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 550);
+            this.panel1.Size = new System.Drawing.Size(1041, 1039);
             this.panel1.TabIndex = 0;
             // 
             // comboBox1
             // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "new_game ABC123-1 p1 p2",
@@ -46,14 +51,15 @@ namespace R2JPGomokuWin {
             "robot ABC123-1 p2 o",
             "manual ABC123-1 p1 x",
             "manual ABC123-1 p2 o"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 582);
+            this.comboBox1.Location = new System.Drawing.Point(12, 1070);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(597, 49);
+            this.comboBox1.Size = new System.Drawing.Size(871, 49);
             this.comboBox1.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(624, 582);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(889, 1070);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(164, 47);
             this.button1.TabIndex = 2;
@@ -65,7 +71,7 @@ namespace R2JPGomokuWin {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 641);
+            this.ClientSize = new System.Drawing.Size(1065, 1131);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.panel1);

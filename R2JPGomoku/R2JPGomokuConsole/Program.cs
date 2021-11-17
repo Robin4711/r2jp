@@ -5,18 +5,20 @@ using System.Threading.Tasks;
 namespace R2JPGomokuConsole {
     class Program {
         static async Task Main(string[] args) {
+            var gameWriter = new GameWriterConsole();
+            var gameController = new GameController(gameWriter);
             switch (args[0]) {
                 case "new_game":
-                    await new GameController().NewGame(args[1], args[2], args[3]);
+                    await gameController.NewGame(args[1], args[2], args[3]);
                     break;
                 case "play":
-                    await new GameController().PlayGame(args[1], args[2], args[3]);
+                    await gameController.PlayGame(args[1], args[2], args[3]);
                     break;
                 case "view":
-                    new GameController().ViewGame(args[1]);
+                    gameController.ViewGame(args[1]);
                     break;
                 case "pretty":
-                    new GameController().ViewPrettyGame(args[1]);
+                    gameController.ViewPrettyGame(args[1]);
                     break;
                 default:
                     break;
