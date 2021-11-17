@@ -19,21 +19,55 @@ namespace R2JPGomokuWin {
             InitializeComponent();
         }
 
+        private string gameId;
+        private string player;
+        private string marker;
+
+        private GameController GetGameController(string gameId, string player, Panel panel) {
+            var board = new Board(panel, null, gameId, player);
+            var gameWriter = new GameWriterWin(board);
+            board.GameWriter = gameWriter;
+            var gameController = new GameController(gameWriter);
+            return gameController;
+        }
+
         private async void button1_Click(object sender, EventArgs e) {
             var command = comboBox1.Text.Split(" ");
-            var gameWriter = new GameWriterWin(new Board(panel1));
-            var gameController = new GameController(gameWriter);
+            string gameId ;
+            string player1;
+            string player2;
+            string player;
+            string marker; 
             switch (command[0]) {
                 case "new_game":
-                    var response = await gameController.NewGame(command[1], command[2], command[3]);
+                    gameId = command[1];
+                    player1 = command[2];
+                    player2 = command[3];
+                    var controller = GetGameController(gameId, player1, panel1);
+                    var response1 = controller.EndGame(gameId);
+                    var response2 = controller.NewGame(gameId, player1, player2);
+                    break;
+                case "connect":
+                    gameId = command[1];
+                    player = command[2];
+                    marker = command[3];
+                    var connectResult = GetGameController(gameId, player, panel1).Connect(gameId, player, marker);
                     break;
                 case "end_game":
-                    await gameController.EndGame(command[1]);
+                    gameId = command[1];
+                    await GetGameController(gameId, "foobar", panel1).EndGame(gameId);
                     break;
                 case "manual":
+                    gameId = command[1];
+                    player = command[2];
+                    marker = command[3];
+                    await GetGameController(gameId, player, panel1).Connect(gameId, player, marker);
                     break;
                 case "robot":
-                    await gameController.PlayGame(command[1], command[2], command[3]);
+                    gameId = command[1];
+                    player = command[2];
+                    marker = command[3];
+                    await GetGameController(gameId, player, panel1).PlayGame(gameId, player, marker);
                     break;
                 default:
                     break;

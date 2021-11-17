@@ -59,13 +59,28 @@ namespace R2JPGomokuLib {
             return response;
         }
 
+        public async Task Connect(string gameId, string player, string marker) {
+            var response = await Call(HttpMethod.Get, $"view_game/{gameId}");
+            gameWriter.WriteGame(response);
+        }
+
         public async Task EndGame(string gameId) {
+            await Call(HttpMethod.Post, $"end_game/{gameId}");
+        }
+
+        public async Task MakeMove(string gameId, string player, int x, int y) {
+            var data = new MoveRequest() { player = player, x = x, y = y };
+            //string json = JsonConvert.SerializeObject(data);
+            var res = await Call(HttpMethod.Put, $"play_game/{gameId}", data);
+            gameWriter.WriteGame(res);
+            var pretty = await Call(HttpMethod.Get, $"view_game/{gameId}/pretty");
+            gameWriter.WriteGamePretty(pretty);
             await Call(HttpMethod.Post, $"end_game/{gameId}");
         }
 
         public async Task PlayGame(string gameId, string myPlayer, string marker) {
             while (true) {
-                var response = Call(HttpMethod.Get, $"view_game/{gameId}").Result;
+                var response = await Call(HttpMethod.Get, $"view_game/{gameId}");
 
                 if (response.Equals("ERROR!")) {
                     gameWriter.WriteError(response);
@@ -82,12 +97,8 @@ namespace R2JPGomokuLib {
                 if (game.next_move.Equals(myPlayer)) {
                     var board = new Board(game.board, marker);
                     var move = board.NextMoveByCells();
-                    var data = new MoveRequest() { player = myPlayer, x = move.X, y = move.Y };
-                    //string json = JsonConvert.SerializeObject(data);
-                    var res = Call(HttpMethod.Put, $"play_game/{gameId}", data).Result;
-                    gameWriter.WriteGame(res);
-                    var pretty = Call(HttpMethod.Get, $"view_game/{gameId}/pretty").Result;
-                    gameWriter.WriteGamePretty(pretty);
+                    await MakeMove(gameId, myPlayer, move.X, move.Y);
+
                 }
 
                 Thread.Sleep(1000);
