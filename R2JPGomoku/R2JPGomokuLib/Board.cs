@@ -124,8 +124,6 @@ namespace R2JPGomokuLib {
                 "=-mmm=",
                 "=mmm-=",
 
-                "=-=ppp",
-                "ppp=-=",
                 "=-ppp=",
                 "=ppp-=",
 
