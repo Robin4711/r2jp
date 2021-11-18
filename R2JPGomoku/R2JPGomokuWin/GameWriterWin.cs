@@ -9,17 +9,26 @@ using static R2JPGomokuLib.GameController;
 namespace R2JPGomokuWin {
     public class GameWriterWin : IGameWriter {
         private readonly Board board;
+        private readonly TextBox message;
 
-        public GameWriterWin(Board board) {
+        public GameWriterWin(Board board, TextBox message) {
             this.board = board;
+            this.message = message;
         }
 
         public void WriteError(string error) {
-            //throw new NotImplementedException();
+            message.Text = error;
         }
 
         public void WriteGame(string game) {
-            var gameResponse = JsonConvert.DeserializeObject<GameResponse>(game);
+            GameResponse gameResponse = null;
+            try {
+                gameResponse = JsonConvert.DeserializeObject<GameResponse>(game);
+            }
+            catch (Exception e) {
+                WriteError(game);
+                return;
+            }
             board.DrawBoard(gameResponse);
         }
 
@@ -28,7 +37,7 @@ namespace R2JPGomokuWin {
         }
 
         public void WriteWinner(string winner) {
-            //throw new NotImplementedException();
+            message.Text = winner;
         }
     }
 }

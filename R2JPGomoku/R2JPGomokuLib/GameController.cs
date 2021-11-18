@@ -81,8 +81,14 @@ namespace R2JPGomokuLib {
                 }
 
                 await ViewGame(response: response);
-
-                var game = JsonConvert.DeserializeObject<GameResponse>(response);
+                GameResponse game = null;
+                try {
+                    game = JsonConvert.DeserializeObject<GameResponse>(response);
+                }
+                catch (Exception e) {
+                    gameWriter.WriteError($"Could not parse: {response}");
+                    return;
+                }
 
                 if (game.winner != null) {
                     gameWriter.WriteWinner(game.winner);

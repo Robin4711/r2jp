@@ -21,7 +21,7 @@ namespace R2JPGomokuWin {
 
         private GameController GetGameController(string gameId, string player, Panel panel) {
             var board = new Board(panel, null, gameId, player);
-            var gameWriter = new GameWriterWin(board);
+            var gameWriter = new GameWriterWin(board, textBox1);
             board.GameWriter = gameWriter;
             var gameController = new GameController(gameWriter);
             return gameController;
