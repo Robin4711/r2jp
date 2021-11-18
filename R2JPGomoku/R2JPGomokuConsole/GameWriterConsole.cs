@@ -19,7 +19,7 @@ namespace R2JPGomokuConsole {
 
         void IGameWriter.WriteGame(string game) {
             //Console.Write(game);
-            Console.Write(game);
+            //Console.Write(game);
         }
     }
 }
