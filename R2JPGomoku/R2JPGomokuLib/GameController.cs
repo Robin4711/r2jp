@@ -81,6 +81,9 @@ namespace R2JPGomokuLib {
                 }
 
                 await ViewGame(response: response);
+
+                Thread.Sleep(500);
+
                 GameResponse game = null;
                 try {
                     game = JsonConvert.DeserializeObject<GameResponse>(response);
@@ -105,7 +108,7 @@ namespace R2JPGomokuLib {
                     }
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
             }
         }
 
