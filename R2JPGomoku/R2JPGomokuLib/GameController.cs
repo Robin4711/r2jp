@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 namespace R2JPGomokuLib {
     public class GameController {
         private readonly IGameWriter gameWriter;
+        private readonly string option;
         private bool canMakeMove = false;
 
         public class NewGameRequest {
@@ -32,8 +33,9 @@ namespace R2JPGomokuLib {
             public int y { get; set; }
         }
 
-        public GameController(IGameWriter gameWriter) {
+        public GameController(IGameWriter gameWriter, string option) {
             this.gameWriter = gameWriter;
+            this.option = option;
         }
 
         public async Task ViewPrettyGame(string gameId) {
@@ -102,7 +104,7 @@ namespace R2JPGomokuLib {
                     canMakeMove = true;
                     if (auto) {
                         var marker = player.Equals(game.player_1) ? "x" : "o";
-                        var board = new Board(game.board, marker);
+                        var board = new Board(game.board, marker, option);
                         var move = board.NextMoveByCells();
                         await MakeMove(gameId, player, move.X, move.Y);
                     }
@@ -121,7 +123,7 @@ namespace R2JPGomokuLib {
 
 
             var debug = JsonConvert.SerializeObject(request);
-            File.WriteAllText(@"C:\Temp\debug.txt", debug);
+            //File.WriteAllText(@"C:\Temp\debug.txt", debug);
             HttpClient http = new HttpClient();
             HttpResponseMessage response;
             try {

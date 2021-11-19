@@ -37,7 +37,7 @@ namespace R2JPGomokuWin {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1029, 884);
+            this.panel1.Size = new System.Drawing.Size(1033, 1056);
             this.panel1.TabIndex = 0;
             // 
             // comboBox1
@@ -48,19 +48,22 @@ namespace R2JPGomokuWin {
             this.comboBox1.Items.AddRange(new object[] {
             "new_game ABC123-1 p1 p2",
             "end_game ABC123-1",
-            "robot ABC123-1 p1 x",
+            "robot ABC123-1 p1 x ",
             "robot ABC123-1 p2 o",
+            "robot ABC123-1 p1 x w",
+            "robot ABC123-1 p2 o w",
             "manual ABC123-1 p1 x",
             "manual ABC123-1 p2 o"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 1070);
+            this.comboBox1.Location = new System.Drawing.Point(12, 1242);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(871, 49);
+            this.comboBox1.Size = new System.Drawing.Size(875, 49);
             this.comboBox1.TabIndex = 1;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(889, 1070);
+            this.button1.Location = new System.Drawing.Point(893, 1242);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(164, 47);
             this.button1.TabIndex = 2;
@@ -70,18 +73,20 @@ namespace R2JPGomokuWin {
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 944);
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(12, 1116);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(1029, 99);
+            this.textBox1.Size = new System.Drawing.Size(1033, 99);
             this.textBox1.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1065, 1131);
+            this.ClientSize = new System.Drawing.Size(1069, 1303);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);

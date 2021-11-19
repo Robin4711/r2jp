@@ -23,15 +23,17 @@ namespace R2JPGomokuWin {
         private readonly Panel panel;
         private readonly string gameId;
         private readonly string player;
+        private readonly string option;
         private List<List<Cell>> cells;
 
         public IGameWriter GameWriter { get; set; }
 
-        public Board(Panel panel, IGameWriter gameWriter, string gameId, string player) {
+        public Board(Panel panel, IGameWriter gameWriter, string gameId, string player, string option) {
             this.panel = panel;
             GameWriter = gameWriter;
             this.gameId = gameId;
             this.player = player;
+            this.option = option;
         }
 
 
@@ -71,7 +73,7 @@ namespace R2JPGomokuWin {
             var cellsAsList = cells.SelectMany(r => r.Select(c => c));
             var c = cellsAsList.Single(c => c.Button.Equals(sender));
             c.Button.Text = "P";
-            await new GameController(GameWriter).MakeMove(gameId, player, c.X, c.Y);
+            await new GameController(GameWriter, option).MakeMove(gameId, player, c.X, c.Y);
         }
 
     }

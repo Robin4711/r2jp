@@ -346,7 +346,7 @@ namespace R2JPGomokuLib.Tests
             PerformNotExpectedTest(board, notExpected);
         }
 
-        private void PerformTest(Board board, Move expected, IList<string> patterns = null)
+        private void PerformTest(Board board, Move expected, IList<Template> patterns = null)
         {
             var actual = board.NextMoveByCells(patterns);
             Assert.IsTrue(expected.X.Equals(actual.X) && expected.Y.Equals(actual.Y), $"Expected X: {expected.X}, Y: {expected.Y}. Actual X: {actual.X}, Y: {actual.Y}");

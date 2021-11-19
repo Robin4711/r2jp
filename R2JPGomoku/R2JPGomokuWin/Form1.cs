@@ -19,11 +19,11 @@ namespace R2JPGomokuWin {
             InitializeComponent();
         }
 
-        private GameController GetGameController(string gameId, string player, Panel panel) {
-            var board = new Board(panel, null, gameId, player);
+        private GameController GetGameController(string gameId, string player, Panel panel, string option = "") {
+            var board = new Board(panel, null, gameId, player, option);
             var gameWriter = new GameWriterWin(board, textBox1);
             board.GameWriter = gameWriter;
-            var gameController = new GameController(gameWriter);
+            var gameController = new GameController(gameWriter, option);
             return gameController;
         }
 
@@ -33,7 +33,8 @@ namespace R2JPGomokuWin {
             string player1;
             string player2;
             string player;
-            string marker; 
+            string option;
+
             switch (command[0]) {
                 case "new_game":
                     gameId = command[1];
@@ -55,14 +56,16 @@ namespace R2JPGomokuWin {
                 case "robot":
                     gameId = command[1];
                     player = command[2];
-                    await GetGameController(gameId, player, panel1).PlayGame(gameId, player, true);
+                    option = command.Length > 4 ? command[4] : "";
+                    await GetGameController(gameId, player, panel1, option).PlayGame(gameId, player, true);
                     break;
                 default:
                     break;
             }
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
 
-
+        }
     }
 }

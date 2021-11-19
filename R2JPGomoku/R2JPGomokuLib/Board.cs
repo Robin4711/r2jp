@@ -20,19 +20,34 @@ namespace R2JPGomokuLib {
         private readonly List<List<string>> board;
         private readonly IList<Cell> cells = new List<Cell>();
         private readonly string playCharacter;
+        private readonly string option;
 
         public class Move {
             public int X { get; set; }
             public int Y { get; set; }
+            public int Value { get; set; }
+
             public Move() { }
-            public Move(int x, int y) {
+            public Move(int x, int y, int value) {
                 X = x;
                 Y = y;
+                Value = value;
             }
         }
 
-        public Board(List<List<string>> board, string playCharacter) {
+        public class Template {
+            public Template(string pattern, int value) {
+                Pattern = pattern;
+                Value = value;
+            }
+
+            public string Pattern { get; }
+            public int Value { get; }
+        }
+
+        public Board(List<List<string>> board, string playCharacter, string option = "") {
             this.playCharacter = playCharacter;
+            this.option = option;
 
             for (int y = 0; y < board.Count; y++) {
                 var row = board[y];
@@ -99,116 +114,115 @@ namespace R2JPGomokuLib {
             return result;
         }
 
-        public Move NextMoveByCells(IList<string> injectedPatterns = null) {
+        public Move NextMoveByCells(IList<Template> injectedPatterns = null) {
             var rowsAsStrings = RowsAsCellLists().Select(r => r.ToString()).ToList();
             var colsAsStrings = ColumnsAsCellLists().Select(c => c.ToString()).ToList();
             var diagonalsAsStrings = Diagonals().Select(d => d.ToString()).ToList();
 
             var sequences = Diagonals().Concat(ColumnsAsCellLists()).Concat(RowsAsCellLists());
 
-            var patterns = injectedPatterns ?? new List<string>() {
-                "-mmmm",
-                "m-mmm",
-                "mm-mm",
-                "mmm-m",
-                "mmmm-",
-
-                "-pppp",
-                "p-ppp",
-                "pp-pp",
-                "ppp-p",
-                "pppp-",
-
-                "=-=mmm",
-                "mmm=-=",
-                "=-mmm=",
-                "=mmm-=",
-
-                "=-ppp=",
-                "=ppp-=",
-
-                "=mm-m=",
-                "=m-mm=",
-
-                "mm=m-",
-                "-m=mm",
-
-
-                "m-=mm",
-                "mm=-m",
-
-                "p=p-p=p",
-
-                "=pp-p=",
-                "=p-pp=",
-
-                "pp=p-",
-                "-p=pp",
-
-
-                "p-=pp",
-                "pp=-p",
-
-                "p=p-p=p",
-
-                "-=m=m=m",
-                "m=m=m=-",
-
-                "m-m=m",
-                "m=m-m",
-
-                "=-=mm=",
-                "=mm=-=",
-                "=-=mm",
-                "mm=-=",
-                "=-mm=",
-                "=mm-=",
-
-
-                "-=m=m=m",
-                "m=m=m=-",
-
-                "m-m=m",
-                "m=m-m",
-
-                "==-pp=",
-                "=pp-==",
-                "=-=pp",
-                "pp=-=",
-                "=-pp=",
-                "=pp-=",
-                "==-p=",
-                "=-p==",
-
-                "=m=m=-=",
-                "=-=m=m=",
-
-                "=m=m-=",
-                "=-m=m=",
-
-                "=-=m=",
-                "=m=-=",
-                "==-m=",
-                "=-m==",
+            var patterns = injectedPatterns ?? new List<Template>() {
+                new Template("-mmmm", 10000),
+                new Template("m-mmm", 10000),
+                new Template("mm-mm", 10000),
+                new Template("mmm-m", 10000),
+                new Template("mmmm-", 10000),
                 
-                "-mm",
-                "mm-",
-                "m-m",
+                new Template("-pppp", 5000),
+                new Template("p-ppp", 5000),
+                new Template("pp-pp", 5000),
+                new Template("ppp-p", 5000),
+                new Template("pppp-", 5000),
 
-                "-pp",
-                "pp-",
-                "p-p",
+                new Template("=-mmm=", 2500),
+                new Template("=mmm-=", 2500),
+                new Template("=mm-m=", 2500),
+                new Template("=m-mm=", 2500),
+                
+                new Template("=-=mmm", 1000),
+                new Template("mmm=-=", 1000),
 
-                "-m",
-                "m-",
+                new Template("=-ppp=", 1000),
+                new Template("=ppp-=", 1000),
+                new Template("=pp-p=", 1000),
+                new Template("=p-pp=", 1000),
 
-                "-p",
-                "p-",
+
+                new Template("mm=m-", 500),
+                new Template("-m=mm", 500),
+                
+                new Template("m-=mm", 500),
+                new Template("mm=-m", 500),
+                
+                new Template("p=p-p=p", 250),
+                
+                new Template("pp=p-", 100),
+                new Template("-p=pp", 100),
+                
+                new Template("p-=pp", 100),
+                new Template("pp=-p", 100),
+                
+                new Template("p=p-p=p", 100),
+                
+                new Template("-=m=m=m", 100),
+                new Template("m=m=m=-", 100),
+                
+                new Template("m-m=m", 100),
+                new Template("m=m-m", 100),
+                
+                new Template("=-=mm=", 100),
+                new Template("=mm=-=", 100),
+                new Template("=-=mm", 100),
+                new Template("mm=-=", 100),
+                new Template("=-mm=", 100),
+                new Template("=mm-=", 100),
+                
+                new Template("-=m=m=m", 100),
+                new Template("m=m=m=-", 100),
+                
+                new Template("m-m=m", 100),
+                new Template("m=m-m", 100),
+                
+                new Template("==-pp=", 50),
+                new Template("=pp-==", 50),
+                new Template("=-=pp", 50),
+                new Template("pp=-=", 50),
+                new Template("=-pp=", 50),
+                new Template("=pp-=", 50),
+                new Template("==-p=", 50),
+                new Template("=-p==", 50),
+                
+                new Template("=m=m=-=", 25),
+                new Template("=-=m=m=", 25),
+                
+                new Template("=m=m-=", 25),
+                new Template("=-m=m=", 25),
+                
+                new Template("=-=m=", 25),
+                new Template("=m=-=", 25),
+                new Template("==-m=", 25),
+                new Template("=-m==", 25),
+                
+                new Template("mm-", 25),
+                new Template("-mm", 25),
+                new Template("m-m", 25),
+
+                new Template("-pp", 25),
+                new Template("pp-", 25),
+                new Template("p-p", 25),
+                
+                new Template("-m", 10),
+                new Template("m-", 10),
+                
+                new Template("-p", 10),
+                new Template("p-", 10),
 
             };
 
+            var possibleMoves = new List<Move>();
+
             foreach (var pattern in patterns) {
-                var searchPattern = pattern.Replace('=', '-');
+                var searchPattern = pattern.Pattern.Replace('=', '-');
                 var rs = sequences;
                 var debug = rs.Select(r => r.ToStringExt());
                 var matches = sequences.Where(r => r.ToStringExt().Contains(searchPattern)).ToList();
@@ -216,14 +230,32 @@ namespace R2JPGomokuLib {
                     var r = matches.First();
                     var s = r.ToStringExt();
                     var start = s.IndexOf(searchPattern);
-                    var offset = pattern.IndexOf("-");
+                    var offset = pattern.Pattern.IndexOf("-");
                     var c = r[start + offset];
 
-                    return new Move(c.X, c.Y);
+                    possibleMoves.Add(new Move(c.X, c.Y, pattern.Value));
                 }
             }
 
-            return new Move() { X = ColumnsAsCellLists().Count / 2, Y = RowsAsCellLists().Count / 2 };
+            var centerX = ColumnsAsCellLists().Count / 2;
+            var centerY = RowsAsCellLists().Count / 2;
+            var centerCell = cells.Single(c => c.X.Equals(centerX) && c.Y.Equals(centerY));
+
+            if (centerCell.Value.Equals("-")) {
+                possibleMoves.Add(new Move(centerX, centerY, 1));
+            }
+
+            if (option.Contains("w")) {
+                var move = possibleMoves
+                    .GroupBy(m => new { X = m.X, Y = m.Y })
+                    .Select(g => new { X = g.Key.X, Y = g.Key.Y, Value = g.Sum(o => o.Value) })
+                    .OrderByDescending(m => m.Value)
+                    .First();
+                return new Move(move.X, move.Y, 1000);
+            }
+
+            return possibleMoves.OrderByDescending(m => m.Value).First();
+
         }
 
 
