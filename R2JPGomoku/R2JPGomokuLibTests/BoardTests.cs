@@ -346,6 +346,48 @@ namespace R2JPGomokuLib.Tests
             PerformNotExpectedTest(board, notExpected);
         }
 
+        [TestMethod()]
+        public void Defensive_Block_TwoTwoInARow() {
+            var listBoard = new List<List<string>>() {
+                new List<string>() { null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, "x", null, null, null },
+                new List<string>() { null, null, "o", null, "x", null , null },
+                new List<string>() { null, "o", null, "o", null, "o", null },
+                new List<string>() { null, null, "o", null, "x", null, null },
+                new List<string>() { null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null }
+            };
+
+            var board = new Board(listBoard, "x", "w");
+
+            var expected = new Move() { X = 2, Y = 3 };
+
+            PerformTest(board, expected);
+        }
+
+        [TestMethod()]
+        public void Offense_Set_ThreeInRowWithNoGap() {
+            var listBoard = new List<List<string>>() {
+                new List<string>() { null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, "o", null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null , null },
+                new List<string>() { null, null, null, "o", "o", null, null, null, null },
+                new List<string>() { null, null, "o", null, "o", null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null }
+            };
+
+            var board = new Board(listBoard, "o", "w");
+
+            var expected = new Move() { X = 4, Y = 3 };
+
+            PerformTest(board, expected);
+        }
+
+
+
         private void PerformTest(Board board, Move expected, IList<Template> patterns = null)
         {
             var actual = board.NextMoveByCells(patterns);
