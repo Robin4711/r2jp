@@ -366,7 +366,7 @@ namespace R2JPGomokuLib.Tests
         }
 
         [TestMethod()]
-        public void Offense_Set_ThreeInRowWithNoGap() {
+        public void Offensive_Set_ThreeInRowWithNoGap() {
             var listBoard = new List<List<string>>() {
                 new List<string>() { null, null, null, null, null, null, null, null, null },
                 new List<string>() { null, null, null, null, null, null, null, null, null },
@@ -387,7 +387,7 @@ namespace R2JPGomokuLib.Tests
         }
 
         [TestMethod()]
-        public void Offense_Set_ThreeWithGapFromTwoWithLargeGap() {
+        public void Offensive_Set_ThreeWithGapFromTwoWithLargeGap() {
             var listBoard = new List<List<string>>() {
                 new List<string>() { null, null, null, null, null, null, null, null, null },
                 new List<string>() { null, null, null, null, null, null, null, null, null },
