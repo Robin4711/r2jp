@@ -386,6 +386,26 @@ namespace R2JPGomokuLib.Tests
             PerformTest(board, expected);
         }
 
+        [TestMethod()]
+        public void Offense_Set_ThreeWithGapFromTwoWithLargeGap() {
+            var listBoard = new List<List<string>>() {
+                new List<string>() { null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null , null },
+                new List<string>() { null, null, "o", null, null, "o", null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null }
+            };
+
+            var board = new Board(listBoard, "o", "w");
+
+            var expected = new Move() { X = 3, Y = 4 };
+
+            PerformTest(board, expected);
+        }
 
 
         private void PerformTest(Board board, Move expected, IList<Template> patterns = null)

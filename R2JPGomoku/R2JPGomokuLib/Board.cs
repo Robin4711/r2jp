@@ -203,7 +203,9 @@ namespace R2JPGomokuLib {
                 new Template("mm=-=", 100),
                 new Template("=-mm=", 100),
                 new Template("=mm-=", 100),
-                
+                new Template("=m-=m=", 100),
+                new Template("=m=-m=", 100),
+
                 new Template("-=m=m=m", 100),
                 new Template("m=m=m=-", 100),
                 
@@ -235,6 +237,10 @@ namespace R2JPGomokuLib {
                 new Template("mm-", 10),
                 new Template("-mm", 10),
                 new Template("m-m", 10),
+                new Template("=m-=m", 10),
+                new Template("=m=-m", 10),
+                new Template("m-=m=", 10),
+                new Template("m=-m=", 10),
 
                 new Template("-pp", 10),
                 new Template("pp-", 10),
