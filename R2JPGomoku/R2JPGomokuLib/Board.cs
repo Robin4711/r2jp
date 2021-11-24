@@ -144,18 +144,18 @@ namespace R2JPGomokuLib {
             var patterns = injectedPatterns ?? new List<Template>() {
             
                 // Level 5 - Offense
-                new Template("-mmmm", 100000),
-                new Template("m-mmm", 100000),
-                new Template("mm-mm", 100000),
-                new Template("mmm-m", 100000),
-                new Template("mmmm-", 100000),
+                new Template("-mmmm", 1000000000),
+                new Template("m-mmm", 1000000000),
+                new Template("mm-mm", 1000000000),
+                new Template("mmm-m", 1000000000),
+                new Template("mmmm-", 1000000000),
                 
                 // Level 5 Defense
-                new Template("-pppp", 5000),
-                new Template("p-ppp", 5000),
-                new Template("pp-pp", 5000),
-                new Template("ppp-p", 5000),
-                new Template("pppp-", 5000),
+                new Template("-pppp", 90000),
+                new Template("p-ppp", 90000),
+                new Template("pp-pp", 90000),
+                new Template("ppp-p", 90000),
+                new Template("pppp-", 90000),
 
                 // Level 4 - Offense
                 new Template("=-mmm=", 2500),
@@ -179,10 +179,22 @@ namespace R2JPGomokuLib {
                 new Template("mm=-m", 500),
                 
                 new Template("p=p-p=p", 250),
-                
+
+                new Template("=p-p=", 100),
+
                 new Template("pp=p-", 100),
                 new Template("-p=pp", 100),
+
+                new Template("=p=p-=", 100),
+                new Template("=-p=p=", 100),
                 
+                new Template("=pp-=", 100),
+                new Template("=-pp=", 100),
+
+                new Template("=p=-pp=", 100),
+                new Template("=pp-=p=", 100),
+
+                //TODO: Change this?
                 new Template("p-=pp", 100),
                 new Template("pp=-p", 100),
                 
@@ -196,8 +208,6 @@ namespace R2JPGomokuLib {
                 
                 new Template("=-=mm=", 100),
                 new Template("=mm=-=", 100),
-                new Template("=-=mm", 100),
-                new Template("mm=-=", 100),
                 new Template("=-mm=", 100),
                 new Template("=mm-=", 100),
                 new Template("=m-=m=", 100),
@@ -216,6 +226,8 @@ namespace R2JPGomokuLib {
                 new Template("=-pp=", 50),
                 new Template("=pp-=", 50),
                 new Template("=p-p=", 50),
+                new Template("=p=p-=", 50),
+                new Template("=-p=p=", 50),
 
                 new Template("=m=m=-=", 25),
                 new Template("=-=m=m=", 25),
@@ -238,6 +250,8 @@ namespace R2JPGomokuLib {
                 new Template("=m=-m", 10),
                 new Template("m-=m=", 10),
                 new Template("m=-m=", 10),
+                new Template("=-=mm", 10),
+                new Template("mm=-=", 10),
 
                 new Template("-pp", 10),
                 new Template("pp-", 10),
