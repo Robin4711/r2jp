@@ -263,6 +263,11 @@ namespace R2JPGomokuLib {
                 new Template("-p", 5),
                 new Template("p-", 5),
 
+                new Template("m-mmmm", -1000000000),
+                new Template("mm-mmm", -1000000000),
+                new Template("mmm-mm", -1000000000),
+                new Template("mmmm-m", -1000000000),
+
             };
 
             var possibleMoves = new List<Move>();
@@ -289,15 +294,16 @@ namespace R2JPGomokuLib {
             }
 
             if (option.Contains("w")) {
-                var boo = possibleMoves
+                var groupedMoves = possibleMoves
                     .GroupBy(m => new { x = m.X, y = m.Y }, (m, ms) => new {
                         key = m,
                         count = ms.Count(),
                         moves = ms,
+                        veto = ms.OrderBy(m => m.Value).First().Value < 0,
                         value = ms.GroupBy(m => m.SequenceType, (m, ms) => ms.OrderByDescending(m => m.Value).First()).Sum(m => m.Value)
-                    });
+                    }); ;
 
-                var moves = boo.OrderByDescending(f => f.value);
+                var moves = groupedMoves.Where(f => !f.veto).OrderByDescending(f => f.value);
                 var move = moves.First();
 
                 return new Move(move.key.x, move.key.y, 1000, "N/A", SequenceType.Row);

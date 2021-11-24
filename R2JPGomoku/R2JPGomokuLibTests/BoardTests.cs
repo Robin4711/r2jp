@@ -351,7 +351,7 @@ namespace R2JPGomokuLib.Tests {
                 new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul }
             };
 
-            var board = new Board(listBoard, "x");
+            var board = new Board(listBoard, "x", "w");
 
             var notExpected = new Move() { X = 4, Y = 2 };
 
