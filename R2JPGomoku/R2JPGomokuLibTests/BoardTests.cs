@@ -4,40 +4,39 @@ using System.Collections.Generic;
 using System.Linq;
 using static R2JPGomokuLib.Board;
 
-namespace R2JPGomokuLib.Tests
-{
+namespace R2JPGomokuLib.Tests {
     [TestClass()]
-    public class BoardTests
-    {
-
+    public class BoardTests {
+        // Constant for representing nul with same length as "x" and "o" 
+        private const string nul = null;
 
         [TestMethod()]
         public void FirstTest_FirstMove_20x20() {
             var listBoard = new List<List<string>>() {
-                //-----------------{    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,   20 }, 
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                //-----------------{    1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,  16,  17,  18,  19,  20 }, 
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
 
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
 
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
 
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x");
@@ -48,15 +47,14 @@ namespace R2JPGomokuLib.Tests
         }
 
         [TestMethod()]
-        public void FirstTest_FirstMove()
-        {
+        public void FirstTest_FirstMove() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x");
@@ -67,15 +65,14 @@ namespace R2JPGomokuLib.Tests
         }
 
         [TestMethod()]
-        public void Test_EmptySpot()
-        {
+        public void Test_EmptySpot() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, "o", null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, "o", nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x");
@@ -88,18 +85,17 @@ namespace R2JPGomokuLib.Tests
 
         [TestMethod()]
         [Ignore]
-        public void Test_AddNextToOurPrevious()
-        {
+        public void Test_AddNextToOurPrevious() {
             var listBoard = new List<List<string>>() {
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, "x", "o", null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "x", "o", nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
             };
 
             var board = new Board(listBoard, "x");
@@ -109,18 +105,17 @@ namespace R2JPGomokuLib.Tests
             PerformTest(board, expected);
         }
         [TestMethod()]
-        public void CanWeWin_FourInRowColumn()
-        {
+        public void CanWeWin_FourInRowColumn() {
             var listBoard = new List<List<string>>() {
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, "x", "o", null, null },
-                new List<string>() {null, null, null, null, null, "x", null, null, null },
-                new List<string>() {null, null, null, null, null, "x", null, null, null },
-                new List<string>() {null, null, null, null, null, "x", null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "x", "o", nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "x", nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "x", nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "x", nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
             };
 
             var board = new Board(listBoard, "x");
@@ -131,18 +126,17 @@ namespace R2JPGomokuLib.Tests
         }
 
         [TestMethod()]
-        public void CanWeWin_ThreeWithCapInRowColumn()
-        {
+        public void CanWeWin_ThreeWithCapInRowColumn() {
             var listBoard = new List<List<string>>() {
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, "x", "o", null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, "x", null, null, null },
-                new List<string>() {null, null, null, null, null, "x", null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "x", "o", nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "x", nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "x", nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
             };
 
             var board = new Board(listBoard, "x");
@@ -153,18 +147,17 @@ namespace R2JPGomokuLib.Tests
         }
 
         [TestMethod()]
-        public void CanTheyWin_FourInRowColumn()
-        {
+        public void CanTheyWin_FourInRowColumn() {
             var listBoard = new List<List<string>>() {
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, "o", "x", null, null },
-                new List<string>() {null, null, null, null, null, "o", null, null, null },
-                new List<string>() {null, null, null, null, null, "o", null, null, null },
-                new List<string>() {null, null, null, null, null, "o", null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "o", "x", nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "o", nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "o", nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "o", nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
             };
 
             var board = new Board(listBoard, "x");
@@ -175,18 +168,17 @@ namespace R2JPGomokuLib.Tests
         }
 
         [TestMethod()]
-        public void CanTheyWin_FourDiagonalInRowColumn()
-        {
+        public void CanTheyWin_FourDiagonalInRowColumn() {
             var listBoard = new List<List<string>>() {
-                new List<string>() {null, null, null, "o", null, null, null, null, null },
-                new List<string>() {null, null, null, null, "o", null, null, null, null },
-                new List<string>() {null, null, null, null, null, "o", "x", null, null },
-                new List<string>() {null, null, null, null, null, null, "o", null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, "o", null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
-                new List<string>() {null, null, null, null, null, null, null, null, null },
+                new List<string>() {nul, nul, nul, "o", nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, "o", nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "o", "x", nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, "o", nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, "o", nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() {nul, nul, nul, nul, nul, nul, nul, nul, nul },
             };
 
             var board = new Board(listBoard, "x");
@@ -196,15 +188,14 @@ namespace R2JPGomokuLib.Tests
             PerformTest(board, expected);
         }
         [TestMethod()]
-        public void CanWeWin_FourInRow_Left()
-        {
+        public void CanWeWin_FourInRow_Left() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { "x", "x", "x", "x", null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { "x", "x", "x", "x", nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x");
@@ -215,15 +206,14 @@ namespace R2JPGomokuLib.Tests
         }
 
         [TestMethod()]
-        public void CanTheyWin_FourInRow_Left()
-        {
+        public void CanTheyWin_FourInRow_Left() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { "o", "o", "o", "o", null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { "o", "o", "o", "o", nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x");
@@ -235,15 +225,14 @@ namespace R2JPGomokuLib.Tests
 
 
         [TestMethod()]
-        public void CanWeWin_FourInRow_Right()
-        {
+        public void CanWeWin_FourInRow_Right() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, "x", "x", "x", "x" },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, "x", "x", "x", "x" },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x");
@@ -255,15 +244,14 @@ namespace R2JPGomokuLib.Tests
 
 
         [TestMethod()]
-        public void CanTneyWin_FourInRow_Right()
-        {
+        public void CanTneyWin_FourInRow_Right() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, "o", "o", "o", "o" },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, "o", "o", "o", "o" },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x");
@@ -276,13 +264,13 @@ namespace R2JPGomokuLib.Tests
         [TestMethod()]
         public void Offensive_SetThreeWithAGap() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, "x", "x", null, null , null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, "x", "x", nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x");
@@ -296,13 +284,13 @@ namespace R2JPGomokuLib.Tests
         [TestMethod()]
         public void Offensive_SetThreeWithAGap_FromTwoWithGap() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, "x", null, "x", null , null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, "x", nul, "x", nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x");
@@ -315,13 +303,13 @@ namespace R2JPGomokuLib.Tests
         [TestMethod()]
         public void Offensive_SetTwoWithAGap_FromOne() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, "x", null, null, null , null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, "x", nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x");
@@ -332,15 +320,15 @@ namespace R2JPGomokuLib.Tests
         }
 
         [TestMethod()]
-        public void Defensive_DoNotBlockWhenThereIsNoRoom_ThreeInRow () {
+        public void Defensive_DoNotBlockWhenThereIsNoRoom_ThreeInRow() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, "x", "x", "x", "o", null , null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, "x", "x", "x", "o", nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "o");
@@ -353,13 +341,13 @@ namespace R2JPGomokuLib.Tests
         [TestMethod()]
         public void Defensive_Block_TwoTwoInARow() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, "x", null, null, null },
-                new List<string>() { null, null, "o", null, "x", null , null },
-                new List<string>() { null, "o", null, "o", null, "o", null },
-                new List<string>() { null, null, "o", null, "x", null, null },
-                new List<string>() { null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, "x", nul, nul, nul },
+                new List<string>() { nul, nul, "o", nul, "x", nul, nul },
+                new List<string>() { nul, "o", nul, "o", nul, "o", nul },
+                new List<string>() { nul, nul, "o", nul, "x", nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x", "w");
@@ -372,15 +360,15 @@ namespace R2JPGomokuLib.Tests
         [TestMethod()]
         public void Offensive_Set_ThreeInRowWithNoGap() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, "o", null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null , null },
-                new List<string>() { null, null, null, "o", "o", null, null, null, null },
-                new List<string>() { null, null, "o", null, "o", null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, "o", nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul,nul },
+                new List<string>() { nul, nul, nul, "o", "o", nul, nul, nul, nul },
+                new List<string>() { nul, nul, "o", nul, "o", nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "o", "w");
@@ -393,15 +381,15 @@ namespace R2JPGomokuLib.Tests
         [TestMethod()]
         public void Offensive_Set_ThreeWithGapFromTwoWithLargeGap() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null , null },
-                new List<string>() { null, null, "o", null, null, "o", null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, "o", nul, nul, "o", nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "o", "w");
@@ -414,22 +402,22 @@ namespace R2JPGomokuLib.Tests
         [TestMethod()]
         public void Defensive_Block_ThreeInARowDiagonal() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null,  "x", null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null,  "o", null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null,  "o", null, "o" , null, null, null },
-                new List<string>() { null, null, null, "x" ,  "x",  "o",  "x",  "x",  "o",  "x",  "x",  "o", null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null,  "o", null, "o" , null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null,  "x", null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, "x", nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, "o", nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, "o", nul, "o", nul, nul, nul },
+                new List<string>() { nul, nul, nul, "x", "x", "o", "x", "x", "o", "x", "x", "o", nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, "o", nul, "o", nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, "x", nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x", "w");
@@ -442,22 +430,22 @@ namespace R2JPGomokuLib.Tests
         [TestMethod()]
         public void Defensive_Block_PossibleThreeAndThreeWithGap_Combined() {
             var listBoard = new List<List<string>>() {
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
-                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null }
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul }
             };
 
             var board = new Board(listBoard, "x", "w");
@@ -467,8 +455,7 @@ namespace R2JPGomokuLib.Tests
             PerformTest(board, expectedAny);
         }
 
-        private void PerformTest(Board board, Move expected, IList<Template> patterns = null)
-        {
+        private void PerformTest(Board board, Move expected, IList<Template> patterns = null) {
             var actual = board.NextMoveByCells(patterns);
             Assert.IsTrue(expected.X.Equals(actual.X) && expected.Y.Equals(actual.Y), $"Expected X: {expected.X}, Y: {expected.Y}. Actual X: {actual.X}, Y: {actual.Y}");
         }
