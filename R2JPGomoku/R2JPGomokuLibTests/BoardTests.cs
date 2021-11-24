@@ -339,6 +339,26 @@ namespace R2JPGomokuLib.Tests {
         }
 
         [TestMethod()]
+        public void Offensive_ShouldNotSetSixInRow() {
+            var listBoard = new List<List<string>>() {
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, "x", "x", "x", nul, "x", "x", nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul }
+            };
+
+            var board = new Board(listBoard, "x");
+
+            var notExpected = new Move() { X = 4, Y = 2 };
+
+            PerformNotExpectedTest(board, notExpected);
+        }
+
+        [TestMethod()]
         public void Defensive_Block_TwoTwoInARow() {
             var listBoard = new List<List<string>>() {
                 new List<string>() { nul, nul, nul, nul, nul, nul, nul },
