@@ -433,24 +433,24 @@ namespace R2JPGomokuLib.Tests {
                 new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
                 new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
                 new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
-                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
-                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
-                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
-                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
-                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
-                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
-                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
-                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
-                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
-                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, "0", nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, nul, "x", nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, nul, "o", nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, "o", nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, "o", "x", "o", nul, "o", nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, "x", nul, "x", nul, "x", nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, "o", "x", nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, nul, "x", nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, nul, "x", "x", nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
+                new List<string>() { nul, nul, nul, "o", nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
                 new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
                 new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul },
                 new List<string>() { nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul, nul }
             };
 
-            var board = new Board(listBoard, "x", "w");
+            var board = new Board(listBoard, "o", "w");
 
-            var expectedAny = new List<Move> { new Move() { X = 9, Y = 8 }, new Move { X = 13, Y = 4 } };
+            var expectedAny = new List<Move> { new Move() { X = 6, Y = 11 } };
 
             PerformTest(board, expectedAny);
         }
