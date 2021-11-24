@@ -9,6 +9,8 @@ namespace R2JPGomokuLib.Tests
     [TestClass()]
     public class BoardTests
     {
+
+
         [TestMethod()]
         public void FirstTest_FirstMove_20x20() {
             var listBoard = new List<List<string>>() {
@@ -421,6 +423,34 @@ namespace R2JPGomokuLib.Tests
                 new List<string>() { null, null, null, "x" ,  "x",  "o",  "x",  "x",  "o",  "x",  "x",  "o", null, null, null, null },
                 new List<string>() { null, null, null, null, null, null, null, null, null, null,  "o", null, "o" , null, null, null },
                 new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null,  "x", null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null }
+            };
+
+            var board = new Board(listBoard, "x", "w");
+
+            var expectedAny = new List<Move> { new Move() { X = 9, Y = 8 }, new Move { X = 13, Y = 4 } };
+
+            PerformTest(board, expectedAny);
+        }
+
+        [TestMethod()]
+        public void Defensive_Block_PossibleThreeAndThreeWithGap_Combined() {
+            var listBoard = new List<List<string>>() {
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
                 new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
                 new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
                 new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
