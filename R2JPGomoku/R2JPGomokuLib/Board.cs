@@ -104,9 +104,8 @@ namespace R2JPGomokuLib {
 
 
         public List<Sequence<Cell>> Diagonals() {
-            var diagonals = new List<List<string>>();
             var diagonalsAsCellLists = new List<Sequence<Cell>>();
-            var length = cells.Count;
+            var length = Convert.ToInt32( Math.Sqrt(cells.Count));
 
             var b = RowsAsCellLists();
 
@@ -138,11 +137,9 @@ namespace R2JPGomokuLib {
         }
 
         public Move NextMoveByCells(IList<Template> injectedPatterns = null) {
-            var rowsAsStrings = RowsAsCellLists().Select(r => r.ToString()).ToList();
-            var colsAsStrings = ColumnsAsCellLists().Select(c => c.ToString()).ToList();
-            var diagonalsAsStrings = Diagonals().Select(d => d.ToString()).ToList();
 
             var sequences = Diagonals().Concat(ColumnsAsCellLists()).Concat(RowsAsCellLists());
+            var debug = String.Join("\r\n", sequences.Select(s => s.ToStringExt()));
 
             var patterns = injectedPatterns ?? new List<Template>() {
             
@@ -285,7 +282,9 @@ namespace R2JPGomokuLib {
                         moves = ms,
                         value = ms.GroupBy(m => m.SequenceType, (m, ms) => ms.OrderByDescending(m => m.Value).First()).Sum(m => m.Value)
                     });
-                var move = boo.OrderByDescending(f => f.value).First();
+
+                var moves = boo.OrderByDescending(f => f.value);
+                var move = moves.First();
 
                 return new Move(move.key.x, move.key.y, 1000, "N/A", SequenceType.Row);
             }

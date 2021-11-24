@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using R2JPGomokuLibTests;
 using System.Collections.Generic;
+using System.Linq;
 using static R2JPGomokuLib.Board;
 
 namespace R2JPGomokuLib.Tests
@@ -407,11 +409,44 @@ namespace R2JPGomokuLib.Tests
             PerformTest(board, expected);
         }
 
+        [TestMethod()]
+        public void Defensive_Block_ThreeInARowDiagonal() {
+            var listBoard = new List<List<string>>() {
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null,  "x", null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null,  "o", null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null,  "o", null, "o" , null, null, null },
+                new List<string>() { null, null, null, "x" ,  "x",  "o",  "x",  "x",  "o",  "x",  "x",  "o", null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null,  "o", null, "o" , null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null,  "x", null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null },
+                new List<string>() { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null }
+            };
+
+            var board = new Board(listBoard, "x", "w");
+
+            var expectedAny = new List<Move> { new Move() { X = 9, Y = 8 }, new Move { X = 13, Y = 4 } };
+
+            PerformTest(board, expectedAny);
+        }
 
         private void PerformTest(Board board, Move expected, IList<Template> patterns = null)
         {
             var actual = board.NextMoveByCells(patterns);
             Assert.IsTrue(expected.X.Equals(actual.X) && expected.Y.Equals(actual.Y), $"Expected X: {expected.X}, Y: {expected.Y}. Actual X: {actual.X}, Y: {actual.Y}");
+        }
+
+        private void PerformTest(Board board, List<Move> expectedAny, IList<Template> patterns = null) {
+            var actual = board.NextMoveByCells(patterns);
+            var match = expectedAny.Any(m => m.X.Equals(actual.X) && m.Y.Equals(actual.Y));
+            Assert.IsTrue(match, $"Expected {expectedAny.ToStringExt()} but was X: {actual.X}, Y: {actual.Y}");
         }
 
         private void PerformNotExpectedTest(Board board, Move notExpected) {
