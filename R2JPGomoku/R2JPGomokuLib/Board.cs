@@ -54,7 +54,7 @@ namespace R2JPGomokuLib {
             public int Value { get; }
         }
 
-        public Board(List<List<string>> board, string playCharacter, string option = "") {
+        public Board(List<List<string>> board, string playCharacter, string option = "w") {
             this.playCharacter = playCharacter;
             this.option = option;
 
@@ -219,21 +219,21 @@ namespace R2JPGomokuLib {
                 new Template("m-m=m", 100),
                 new Template("m=m-m", 100),
                 
-                new Template("==-pp=", 50),
-                new Template("=pp-==", 50),
-                new Template("=-=pp", 50),
-                new Template("pp=-=", 50),
-                new Template("=-pp=", 50),
-                new Template("=pp-=", 50),
-                new Template("=p-p=", 50),
-                new Template("=p=p-=", 50),
-                new Template("=-p=p=", 50),
+                new Template("==-pp=", 75),
+                new Template("=pp-==", 75),
+                new Template("=-=pp", 75),
+                new Template("pp=-=", 75),
+                new Template("=-pp=", 75),
+                new Template("=pp-=", 75),
+                new Template("=p-p=", 75),
+                new Template("=p=p-=", 75),
+                new Template("=-p=p=", 75),
 
-                new Template("=m=m=-=", 25),
-                new Template("=-=m=m=", 25),
-                
-                new Template("=m=m-=", 25),
-                new Template("=-m=m=", 25),
+                new Template("=m=m-=", 55),
+                new Template("=-m=m=", 55),
+
+                new Template("=m=m=-=", 45),
+                new Template("=-=m=m=", 45),
                 
                 new Template("=-=m=", 25),
                 new Template("=m=-=", 25),
